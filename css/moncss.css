@@ -90,7 +90,8 @@ body{
 #galery-artist li a:link, #galery-artist li a:visited{
 	width:200px;
 	height:100px;
-	background-color: #1d5f1d;
+	background: #1d5f1d url(../sources/galery-artist.png);
+	background-position: 0px 0px;
 	list-style-type: none;
 	line-height:50px;
 	text-align:center;
@@ -104,7 +105,7 @@ body{
  	text-decoration: none;
  	float:left;
 }
-#galery-artist li a:hover { background-color: #A9FE9C; color:#1d5f1d;}
+#galery-artist li a:hover { background: #A9FE9C url(../sources/galery-artist.png); background-position: 0px 108px; color:#1d5f1d;}
 #galery-artist li a:active { background-color: #5A4; }
 hr{
 	color: #1d5f1d;
@@ -114,13 +115,13 @@ hr{
 }
 #menufond
 {
-  background: #1d5f1d;
+  background: #1d5f1d url(../sources/menufond.png);
   width:100%;
   min-width:800px;
   position:fixed;
   top:0;
  height:39px;
- border-bottom:solid 2px #310;
+ border-bottom:solid 2px #040;
  z-index:200;
  color:white;
  line-height:39px;
@@ -170,7 +171,7 @@ hr{
  display: block;
  height: 30px;
  color: #FFF;
- background: #1d5f1d;
+ background: #1d5f1d url(../sources/menufond.png);
  margin: 0;
  padding: 4px 8px;
  border-right: 1px solid #fff;
@@ -212,9 +213,6 @@ hr{
  border: 0;
 }	
 #menuDeroulant li:hover > .sousMenu { display: block; }
-
-
-
 #menu-droit
 {
  position:fixed;
@@ -261,7 +259,7 @@ hr{
  display: block;
  height: 30px;
  color: #FFF;
- background: #1d5f1d;
+ background: #1d5f1d url(../sources/menufond.png);
  margin: 0;
  padding: 4px 8px;
  border-left: 1px solid #fff;
