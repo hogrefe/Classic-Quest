@@ -5,10 +5,21 @@
 
 	include('bdd.php');
 	include('pages/functions.php');
-
-
+	if(isset($suppr) && $suppr == "suppr"){
+		$sql = 'DELETE FROM `users` WHERE `id` = "'.$id.'"';
+		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+		header('Location:supprimer-ban');
+	}
+	if(isset($ban) && $ban == "ban"){
+		$user = recup_user($id);
+		$sql = 'DELETE FROM `users` WHERE `id` = "'.$id.'"';
+		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+		$sql = "INSERT INTO bans Values('','".$user[3]."')";
+		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+		header('Location:supprimer-ban');
+	}
 	$results = array();
-	$sql = mysql_query("SELECT * FROM users WHERE statut = 'nonverif' ORDER BY email ASC");
+	$sql = mysql_query("SELECT * FROM users WHERE statut != 'webmaster' AND statut != 'admin' ORDER BY email ASC");
 	while($row = mysql_fetch_assoc($sql)){
 		$results[] = $row; 
 	}
@@ -16,8 +27,8 @@
 	while($i < count($results)){
 		$resultat = $results[$i];
 		$i++;
-		echo $resultat['username']." : <strong>".$resultat['email']."</strong> voudrait devenir redacteur pour le site. Voici sa présentation : <br />".$resultat['presentation']."<br />";
-		echo "<a href='validationok".$resultat['id']."'>Rédacteur</a> <a href='validationnon".$resultat['id']."'>Non valide</a>";
+		echo $resultat['username']." : <strong>".$resultat['email']."</strong><br /> Voici sa présentation : <br />".$resultat['presentation']."<br />";
+		echo "<a href='supprimer-bans".$resultat['id']."'>Supprimer</a> <a href='supprimer-banb".$resultat['id']."'>Bannir</a>";
 		echo "<hr />";
 	}
 	if(count($results) == 0)

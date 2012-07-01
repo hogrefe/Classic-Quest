@@ -5,6 +5,4 @@ bdd (structure) :
 
 Chose restante a faire :
 	moteur de recherche ok yen a un mais amelioration du script serai beaucoup mieu
-	supprimer ou ban
 	lexique
-	notification ou date de publication

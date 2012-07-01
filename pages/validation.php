@@ -30,7 +30,7 @@
 	while($i < count($results)){
 		$resultat = $results[$i];
 		$i++;
-		echo $resultat['username']." : <strong>".$resultat['email']."</strong> voudrait devenir redacteur pour le site. Voici sa présentation : <br />".$resultat['presentation']."<br />";
+		echo $resultat['username']." : <strong>".$resultat['email']."</strong> voudrait devenir redacteur pour le site.<br /> Voici sa présentation : <br />".$resultat['presentation']."<br />";
 		echo "<a href='validationok".$resultat['id']."'>Rédacteur</a> <a href='validationnon".$resultat['id']."'>Non valide</a>";
 		echo "<hr />";
 	}

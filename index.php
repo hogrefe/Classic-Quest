@@ -126,6 +126,19 @@
 							}
 							$temp = "validation";
 						}
+						// on decoupe l'enregistrement de son id
+						elseif(preg_match("/pages\/supprimer-ban/",$_GET['page'])){
+							$id =  substr($_GET["page"], 19, -4);
+							if(preg_match("/s/",$id)){
+								$suppr = "suppr";
+								$id = substr($id, 1);
+							}
+							if(preg_match("/b/",$id)){
+								$ban = "ban";
+								$id = substr($id, 1);
+							}
+							$temp = "supprimer-ban";
+						}
 						else include('pages/galery-artist.php'); 
 						// on inclus la page principale de l'application
 						if(isset($temp))
