@@ -9,17 +9,25 @@ body{
 	left:0;
 	padding:0;
 	margin:0;
-	background-color:#ddb;
+	background: #ddb url(../sources/fond.png);
 }
 #bas{
 	position:relative;
-	background-color:#1d5f1d;
+	background-color:#005806;
 	width:100%;
+	min-width:800px;
 	height:26px;
 	line-height:26px;
 	text-align:center;
 	top:200px;
 	color:white;
+}
+#bas a{
+	text-decoration: none;
+	color:#fff;
+}
+#bas a:hover{
+	color:#AFC;
 }
 #contenu{
 	position:relative;
@@ -63,7 +71,7 @@ body{
 	text-align:center;
 }
 #fin-galery-artist a{
-	background-color:#ddb;
+	background: #ddb url(../sources/fond.png);
 	padding:4px;
 	margin:2px;
 	border:solid 1px #1d5f1d;
@@ -71,7 +79,7 @@ body{
 	color:#1d5f1d;
 }
 #fin-galery-artist a:hover{
-	background-color:#1d5f1d;
+	background:#1d5f1d;
 	color:#fff;
 }
 #galery-artist{
@@ -87,25 +95,31 @@ body{
 	height: auto;
 	overflow: hidden;
 }
+#galery-artist img{
+	width:  150px;
+	height: 150px;
+	border: inset 2px #151;
+}
 #galery-artist li a:link, #galery-artist li a:visited{
 	width:200px;
-	height:100px;
+	height:200px;
 	background: #1d5f1d url(../sources/galery-artist.png);
 	background-position: 0px 0px;
 	list-style-type: none;
-	line-height:50px;
 	text-align:center;
 	border-radius:5px;
 	moz-border-radius:5px;
 	display: block;
-	font-size:20px;
+	font-size:16px;
  	color: #FFF;
  	margin: 20px;
  	padding: 4px 8px;
  	text-decoration: none;
  	float:left;
+ 	overflow:hidden;
+ 	border: outset 2px #040;
 }
-#galery-artist li a:hover { background: #A9FE9C url(../sources/galery-artist.png); background-position: 0px 108px; color:#1d5f1d;}
+#galery-artist li a:hover { background: #A9FE9C url(../sources/galery-artist.png); background-position: 0px 208px; color:#111;}
 #galery-artist li a:active { background-color: #5A4; }
 hr{
 	color: #1d5f1d;
@@ -193,6 +207,7 @@ hr{
 {
  background-image: none;
  background-color: #A9FE9C;
+ color:#000;
 }	
 #menuDeroulant .sousMenu li
 {
@@ -324,6 +339,25 @@ hr{
     margin:5px -5px;
     padding:5px;
 }
+#partenaires{
+	text-align:justify;
+	word-wrap:breapxword;
+	min-width:800px;
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	top:0px;
+	height:100px;
+	color:#000;
+}
+#partenaires a{
+	text-decoration: none;
+	color:#000;
+}
+#partenaires a:hover{
+	color:#1d5f1d;
+}
 #sel{
 	background-color:#fff;
 	padding:4px;
@@ -334,7 +368,7 @@ hr{
 }
 #search a{
 	display: block;
-	width:100%;
+	width:98%;
 	height:35px;
 	line-height: 35px;
 	overflow: hidden;
@@ -343,9 +377,11 @@ hr{
 	padding-bottom: 5px;
 	color:#000;
 	text-decoration: none;
+	padding-left:1%;
 }
 #search a:hover{
-	background-color:#f00;
+	background-color:#1d5f1d;
+	color:#A9FE9C;
 
 }
 table {

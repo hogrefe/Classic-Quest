@@ -1,5 +1,8 @@
 <?php
 	session_start();
 	session_destroy();
-	header('Location:index.php');
+	//redirection
+	echo '<SCRIPT LANGUAGE="JavaScript">
+			document.location.href="index.php"
+		</SCRIPT>';
 ?>

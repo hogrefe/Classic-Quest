@@ -1,5 +1,4 @@
 <?php
-	echo "<h1>Connexion</h1>";
 	if(isset($_POST['submit'])){
 		$username = htmlspecialchars(trim($_POST['username'])); // recupere l'username de fassont securiser
 		$password = htmlspecialchars(trim($_POST['password'])); // recupere le password (mot de pass) de fassont securiser
@@ -19,42 +18,21 @@
 						$_SESSION['statut'] = $row[5];				// Variable de session statut
 						$_SESSION['email'] = $row[3];
 						$_SESSION['presentation'] = $row[4];
-						header('Location:index.php');
+						//redirection
+						echo '<SCRIPT LANGUAGE="JavaScript">
+									document.location.href="index.php"
+								</SCRIPT>';
 					}else $error[] = "Statut non vérifié! Veuillez attendre la réponse de notre équipe pour vous connecter";
 				}
 			}else $error[] = "Nom d'utilisateur ou mots de passe incorrecte!";
 		}else $error[] = "Si vous voulez vous connecter, veuillez saisir tous les champs du formulaire prévu à cet effet!";
 	}
-
-?>
-		<style>
-			label{
-				float:left;
-				display:block;
-				width:200px;
-			}
-		</style>
-		<form method="POST" action="">
-			<label for="username">Votre nom d'utilisateur :</label>
-			<input type="text" name="username" /><br />
-			<label for="password">Mots de passe : </label>
-			<input type="password" name="password" /><br /><br />
-			<input type="submit" value="Connection" name="submit" />
-			<input type="submit" value="Effacer" name="nul" />
-		</form>
-		<hr />
-		<?php
-			if(!empty($error)){
-				foreach ($error as $errors) { //errors est un tableau donc on peut avoir plusieur erreur, style profile nom...
-					echo "<span style='color:red;'><strong>".$errors.'</strong></span><br />';
-				}
-			}
-		?>
-		Ceci est la page connexion des administrateur et modérateur du site. Si vous aussi vous souhaitez participer a completer le contenue de notre site.
-		Veuillez nous faire par de ceci par email : haris.seldon@gmail.com. Nous vous répondrons dans le splus bref délais. Merci de votre participation par avance.
-		<hr />
-		<?php
-	echo "<h1>S'inscrire</h1>";
+	// inscription----------------------------------------------------------------------------------------------------------
+	if(!empty($error)){
+		foreach ($error as $errors) { //errors est un tableau donc on peut avoir plusieur erreur, style profile nom...
+			echo "<span style='color:red;'><strong>".$errors.'</strong></span><br />';
+		}
+	}
 	if(isset($_POST['submitinscr'])){
 		$username = htmlspecialchars(trim(addslashes($_POST['username']))); // recupere l'username de fassont securiser
 		$password = htmlspecialchars(trim(addslashes($_POST['password']))); // recupere le password (mot de pass) de fassont securiser
@@ -71,7 +49,7 @@
 					if($rows==0){									 // S'il nexiste pas dans la bdd
 						$nonverif = "nonverif";
 						$reg = mysql_query("INSERT INTO users Values('','$username','$password','$email','$biography','$nonverif')"); // ajoute l'element dans la table
-						include('pages/functions.php');
+						
 						$sujet = "Inscription d'un nouveau membre sur musique classique";
 						$message = "Un nouveau redacteur? ".$email." il envoi le message suivant ".$_POST['biography'].". A bientot!";
 						$adresse = "haris.seldon@gmail.com";
@@ -83,6 +61,24 @@
 		}else $errorb[] = "Si vous voulez vous inscrire, veuillez saisir tous les champs du formulaire prévu à cet effet!";		 // IDEM POUR UN if
 	}
 ?>
+		<style>
+			label{
+				float:left;
+				display:block;
+				width:200px;
+			}
+		</style>
+		<h1>Connexion</h1>
+		<form method="POST" action="">
+			<label for="username">Votre nom d'utilisateur :</label>
+			<input type="text" name="username" /><br />
+			<label for="password">Mots de passe : </label>
+			<input type="password" name="password" /><br /><br />
+			<input type="submit" value="Connection" name="submit" />
+			<input type="submit" value="Effacer" name="nul" /><a name="inscrire"></a>
+		</form>
+		<hr />
+		<h1>S'inscrire</h1>
 		<form method="POST" action="">
 			<label for="username">Votre login : </label>
 			<input type="text" name="username" /><br /><br />

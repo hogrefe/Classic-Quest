@@ -1,6 +1,6 @@
 <?php
 	if(isset($id)){
-		include('pages/functions.php');
+		
 		$enreg = recup_enreg($id);
 		$artist = recup_artist($enreg[1]);
 		echo "<center><h1>".$enreg[7]."</h1></center>
@@ -22,14 +22,52 @@
 				echo "<br /><a href='mod-enreg".$id."'>Modifier l'enregistrement</a> - <a href='suppr-enreg".$id."'>Supprimer l'enregistrement</a>";
 			}
 		echo "</div>
-			<div>
 			<hr />";
 			if($enreg[9] != ""){
 				echo "<h2>Histoire</h2>
 					$enreg[9]
 					<hr />";
 			}
-			echo "<span class='auteur'>Dernière modification par $enreg[10].</span>
-			</div>";
-	}else header('Location:index.php');
+			echo "<div id='enreg'>";
+			$enreg = afficher_enregistrement($artist[0]);
+			if(count($enreg) != 0){
+			echo "<h3>Liste des enregistrements du même compositeur ($artist[2])</h3>
+				 <table border='0' width='100%'>
+					<tr>
+						<td>Opus</td>
+						<td>Titre</td>
+						<td>Date de création</td>
+						<td>Durée (h:m:s)</td>
+						<td>Type de musique</td>
+						<td>Instruments</td>
+						<td>Interpretes</td>
+					</tr>
+					<tr>";
+			$i = 0;
+			while($i < count($enreg)){
+				$res = $enreg[$i];
+				$date = Decoupedatetime($res['annee']);
+				echo "<tr>
+						<td>".$res['opus']."</td>
+						<td><a href='enreg".$res['id']."'>".$res['titre']."</a></td>
+						<td>".$date."</td>
+						<td>".$res['duree']."</td>
+						<td>".$res['type']."</td>
+						<td>".$res['instruments']."</td>
+						<td>".$res['interpretes']."</td>
+					</tr>";
+				$i++;
+			}
+			echo   "</tr>
+				  </table>";
+			}
+			echo "</div>";
+			$auteur = $enreg[0];
+			echo "<span class='auteur'>Dernière modification par ".$auteur['auteur'].".</span>";
+	}else{
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="index.php"
+			</SCRIPT>';
+	}
 ?>

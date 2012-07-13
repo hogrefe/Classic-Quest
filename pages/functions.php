@@ -81,12 +81,26 @@
     }
 
     // galery artist
-	function afficher_artist($lettre){ 		// affiche les element de la page demander
+	function afficher_artist($lettre,$artisttype){ 		// affiche les element de la page demander
     	include('bdd.php');
 		$results = array();
+		if($artisttype == ''){
+			$restypeartist = '';
+		}else $restypeartist = "WHERE typeartist = '$artisttype'";
 		if($lettre == ''){
-			$sql = mysql_query("SELECT * FROM artist ORDER BY nomartist ASC");
-		}else $sql = mysql_query("SELECT * FROM artist WHERE nomartist LIKE '".$lettre."%' ORDER BY nomartist ASC");
+			$sql = mysql_query("SELECT * FROM artist ".$restypeartist." ORDER BY nomartist ASC");
+		}else $sql = mysql_query("SELECT * FROM artist ".$restypeartist." AND nomartist LIKE '".$lettre."%' ORDER BY nomartist ASC");
+		while($row = mysql_fetch_assoc($sql)){
+			$results[] = $row; 
+		}
+		return $results;
+	}
+
+	// galery nouveauté
+	function afficher_nouveaute(){ 		// affiche les element de la page demander
+    	include('bdd.php');
+		$results = array();
+		$sql = mysql_query("SELECT * FROM artist order by id desc limit 0,10");
 		while($row = mysql_fetch_assoc($sql)){
 			$results[] = $row; 
 		}

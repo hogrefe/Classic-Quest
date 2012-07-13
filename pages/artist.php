@@ -1,6 +1,6 @@
 <?php
 	if(isset($id)){
-	include('pages/functions.php');
+	//
 	$artist = recup_artist($id);
 	$neele = Decoupedatetime($artist[3]);
 	$mortle =  Decoupedatetime($artist[5]);
@@ -40,6 +40,7 @@
 					$artist[7]
 					<hr />";
 			}
+			// recup user
 			echo "<span class='auteur'>Dernière modification par $artist[8].</span>
 			</div>
 			<div id='enreg'>";
@@ -76,5 +77,10 @@
 				  </table>";
 			}
 			echo "</div>";
-	}else header('Location:index.php');
+	}else {
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="index.php"
+			</SCRIPT>';
+	}
 ?>

@@ -1,8 +1,11 @@
 <?php
 	if(!isset($_SESSION['username'])){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
-	include('pages/functions.php');
+	
 	if(isset($_POST['submit'])){
 		if(!empty($_POST['interpretele']))
 			$dateb =  Reversedecoupedatetime(htmlspecialchars(trim(addslashes($_POST['interpretele']))));
@@ -19,9 +22,12 @@
 			$username = $_SESSION['username'];
 		}else $username = "HariS Seldon";
 		if($titre && $nom){
-			$sql = 'UPDATE enregistrement SET idartist="'.$nom.'", interpretes="'.$interpretepar.'", duree="'.$duree.'",annee = "'.$dateb.'", type="'.$type.'", instruments="'.$instruments.'", titre="'.$titre.'",opus="'.$opus.'", histoire="'.$biography.'", auteur="'.$username.'" WHERE id="'.$id.'"';
+			$sql = 'UPDATE enregistrement SET idartist="'.$nom.'", interpretes="'.$interpretepar.'", duree="'.$duree.'",annee = "'.$dateb.'", type="'.$type.'", instruments="'.$instruments.'", titre="'.$titre.'",opus="'.$opus.'", histoire="'.$biography.'", auteur="'.$username.'", creerle="'.date("Y-m-d H:i:s").'" WHERE id="'.$id.'"';
 			mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
-			header('Location:enreg'.$id);
+			//redirection
+			echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="enreg'.$id.'"
+			</SCRIPT>';
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le titre et le nom de l'artist</span></b>";
 	}
 	$enreg = recup_enreg($id);

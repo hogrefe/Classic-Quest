@@ -1,9 +1,12 @@
 <?php
 	if(!isset($_SESSION['username'])){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
 
-	include('pages/functions.php');
+	
 	if(isset($_POST['submit'])){
 		$neeleb = "";
 		$mortleb ="";
@@ -16,12 +19,13 @@
 		$realnom = htmlspecialchars(trim(addslashes($_POST['realnom'])));
 		$neea = htmlspecialchars(trim(addslashes($_POST['neea'])));
 		$morta = htmlspecialchars(trim(addslashes($_POST['morta'])));
+		$typeartist = htmlspecialchars(trim(addslashes($_POST['typeartist'])));
 		$biography = addslashes($_POST['biography']);
 		if(isset($_SESSION['username'])){ // inutile c de la securite
 			$username = $_SESSION['username'];
 		}else $username = "HariS Seldon";
 		if($realnom && $nom){
-			$sql = "INSERT INTO artist Values('','$nom','$realnom','$neeleb','$neea','$mortleb','$morta','$biography','$username')";
+			$sql = "INSERT INTO artist Values('','$nom','$realnom','$neeleb','$neea','$mortleb','$morta','$biography','$username','".date("Y-m-d H:i:s")."','$typeartist')";
 			mysql_query($sql) or die('<span style="color:red;">L\'artiste est déjà dans la base de donnée!</span>');
 			$id=mysql_insert_id(); // recupere l'id apres insert
 			// Upload des images.
@@ -46,7 +50,10 @@
 					Img::creerMin("sources/images/".$id.".".$ext,"sources/images/min/",$id.".".$ext,200,200);
 				}
 			}
-			header('Location:index.php');
+			//redirection
+			echo '<SCRIPT LANGUAGE="JavaScript">
+					document.location.href="index.php"
+				</SCRIPT>';
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le pseudonime et le nom réel de l'artist</span></b>";
 	}
 	echo 	"<div id='mod'>
@@ -60,6 +67,11 @@
 				<td><label for='neea'> à : </label><input type='text' name='neea' value='' /></td></tr>
 				<tr><td><label for='mortle'>Décédé(e) le : </label><input type='text' name='mortle' value='' /></td>
 				<td><label for='morta'> à : </label><input type='text' name='morta' value='' /></td></tr>
+				<tr><td><label for='typeartist'>L'artiste est un : </label>
+					<select name='typeartist'>
+						<option value='Compositeur'>Compositeur</option>
+						<option value='Interprete'>Interprete</option>
+					</select></td></tr>
 			</table>
 			<h3>Biographie :</h3><br />
 			<textarea name='biography'></textarea><br /><center>

@@ -1,8 +1,11 @@
 <?php
 	if(!isset($_SESSION['username'])){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
-	include('pages/functions.php');
+	
 	if(isset($_POST['submit'])){
 		if(!empty($_POST['interpretele']))
 			$dateb =  Reversedecoupedatetime(htmlspecialchars(trim(addslashes($_POST['interpretele']))));
@@ -19,9 +22,12 @@
 			$username = $_SESSION['username'];
 		}else $username = "HariS Seldon";
 		if($titre && $nom){
-		$sql = "INSERT INTO enregistrement Values('','$nom','$interpretepar','$duree','$dateb','$type','$instruments','$titre','$opus','$biography','$username')";
+		$sql = "INSERT INTO enregistrement Values('','$nom','$interpretepar','$duree','$dateb','$type','$instruments','$titre','$opus','$biography','$username','".date("Y-m-d H:i:s")."')";
 		mysql_query($sql) or die('<span style="color:red;">L\'enregistrement et déjà dans la base de donnée!</span>');
-		header('Location:enreg'.$id);
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="enreg'.$id.'"
+			</SCRIPT>';
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le titre et le nom de l'artist</span></b>";
 	}
 	echo 	"<div id='mod'>

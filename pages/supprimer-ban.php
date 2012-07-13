@@ -1,14 +1,20 @@
 <?php
 	if(!isset($_SESSION['username']) && $_SESSION['statut'] != "webmaster"){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
 
 	include('bdd.php');
-	include('pages/functions.php');
+	
 	if(isset($suppr) && $suppr == "suppr"){
 		$sql = 'DELETE FROM `users` WHERE `id` = "'.$id.'"';
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
-		header('Location:supprimer-ban');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="supprimer-ban"
+			</SCRIPT>';
 	}
 	if(isset($ban) && $ban == "ban"){
 		$user = recup_user($id);
@@ -16,7 +22,10 @@
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$sql = "INSERT INTO bans Values('','".$user[3]."')";
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
-		header('Location:supprimer-ban');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="supprimer-ban"
+			</SCRIPT>';
 	}
 	$results = array();
 	$sql = mysql_query("SELECT * FROM users WHERE statut != 'webmaster' AND statut != 'admin' ORDER BY email ASC");

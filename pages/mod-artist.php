@@ -1,9 +1,12 @@
 <?php
 	if(!isset($_SESSION['username'])){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
 
-	include('pages/functions.php');
+	
 	if(isset($_POST['submit'])){
 		// Upload des images.
 			if(!empty($_FILES)){
@@ -36,14 +39,18 @@
 		$realnom = htmlspecialchars(trim(addslashes($_POST['realnom'])));
 		$neea = htmlspecialchars(trim(addslashes($_POST['neea'])));
 		$morta = htmlspecialchars(trim(addslashes($_POST['morta'])));
+		$typeartist = htmlspecialchars(trim(addslashes($_POST['typeartist'])));
 		$biography = addslashes($_POST['biography']);
 		if(isset($_SESSION['username'])){ // inutile c de la securite
 			$username = $_SESSION['username'];
 		}else $username = "HariS Seldon";
 		if($realnom && $nom){
-			$sql = 'UPDATE artist SET nomartist="'.$nom.'", nom="'.$realnom.'",neele = "'.$neeleb.'", neea="'.$neea.'", mortle="'.$mortleb.'", morta="'.$morta.'", biography="'.$biography.'", auteur="'.$username.'" WHERE id="'.$id.'"';
+			$sql = 'UPDATE artist SET nomartist="'.$nom.'", nom="'.$realnom.'",neele = "'.$neeleb.'", neea="'.$neea.'", mortle="'.$mortleb.'", morta="'.$morta.'", biography="'.$biography.'", auteur="'.$username.'", creerle="'.date("Y-m-d H:i:s").'", typeartist= "'.$typeartist.'" WHERE id="'.$id.'"';
 			mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
-			header('Location:artist'.$id);
+			//redirection
+			echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="artist'.$id.'"
+			</SCRIPT>';
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le pseudonime et le nom réel de l'artist</span></b>";
 	}
 
@@ -61,6 +68,19 @@
 					<td><label for='neea'> à : </label><input type='text' name='neea' value='".$artist[4]."' /></td></tr>
 					<tr><td><label for='mortle'>Décédé(e) le : </label><input type='text' name='mortle' value='".$mortle."' /></td>
 					<td><label for='morta'> à : </label><input type='text' name='morta' value='".$artist[6]."' /></td></tr>
+					<tr><td><label for='typeartist'>L'artiste est un : </label>
+					<select name='typeartist'>
+						<option value='Compositeur' ";
+						if($artist[10] == "Compositeur"){
+							echo " selected='selected'";
+						}
+						echo ">Compositeur</option>
+						<option value='Interprete' ";
+						if($artist[10] == "Interprete"){
+							echo " selected='selected'";
+						}
+						echo ">Interprete</option>
+					</select></td></tr>
 				</table>
 				<h3>Biographie :</h3><br />
 				<textarea id='biography' name='biography'>".$artist[7]."</textarea><br /><center>

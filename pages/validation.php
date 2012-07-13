@@ -1,17 +1,23 @@
 <?php
 	if(!isset($_SESSION['username']) && $_SESSION['statut'] != "webmaster"){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
 
 	include('bdd.php');
-	include('pages/functions.php');
+	
 	if(isset($ok) && isset($id)){
 		$resultat = recup_user($id);
 		$sql = 'UPDATE users SET statut="redacteur" WHERE id="'.$id.'"';
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$contenu="Bonjour, votre compte à été validé. Vous pouvez désormais vous connecter sur le site et ajouter de nouveau compositeur ou enregistrement. Merci à vous!";
 		sendmail($resultat[3],$contenu,'Bienvenue en tant que redacteur sur Classic Quest');
-		header('Location:validation');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="validation"
+			</SCRIPT>';
 	}
 	if(isset($non) && isset($id)){
 		$resultat = recup_user($id);
@@ -19,7 +25,10 @@
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$contenu = "Malheuresement votre compte n'a pas été retenu en tant que redcteur. Vous pouvez a tout moment vous réinscrire et proposer une présentation de vos objectif plus complet et adéquat pour devenir rédacteur sur notre site. Merci a vous!";
 		sendmail($resultat[3],$contenu,'Profil non valider sur Classic Quest');
-		header('Location:validation');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="validation"
+			</SCRIPT>';
 	}
 	$results = array();
 	$sql = mysql_query("SELECT * FROM users WHERE statut = 'nonverif' ORDER BY email ASC");

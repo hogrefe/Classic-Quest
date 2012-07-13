@@ -6,7 +6,7 @@
 					$error[]= "<span style='color:red;'>Veuillez saisir une recherche!</span>";
 				}
 				if(empty($error)){
-					include('pages/functions.php');
+					
 					resultat_recherche($search,$table);
 				}
 				else{
@@ -15,6 +15,11 @@
 					}
 				}
 				echo "<br /><br />";
-			} else header('Location:index.php');
+			} else{
+				//redirection
+			echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="index.php"
+			</SCRIPT>';
+			}
 
 ?>

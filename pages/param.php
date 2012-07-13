@@ -1,10 +1,13 @@
 <?php
 	if(!isset($_SESSION['username'])){
-		header('Location:admin');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="admin"
+			</SCRIPT>';
 	}
 	
 	include('bdd.php');
-	include('pages/functions.php');
+	
 	$user = recup_user($_SESSION['id']);
 
 	if(isset($_POST['submit'])){
@@ -29,7 +32,10 @@
 		$_SESSION['username'] = $username;
 		$_SESSION['email'] = $email;
 		$_SESSION['presentation'] = $presentation;
-		header('Location:param');
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="param"
+			</SCRIPT>';
 	}
 	echo 	"<div id='mod'><form method='POST' action=''>
 				<h3>Vos coordonnées :</h3>
