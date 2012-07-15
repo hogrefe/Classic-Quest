@@ -3,5 +3,3 @@ Chose restante a faire :
 	moteur de recherche evenement	
 
 	lexique
-
-	Supprimer auto depasser
