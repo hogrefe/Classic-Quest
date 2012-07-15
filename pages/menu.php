@@ -6,6 +6,7 @@
 		<ul class='sousMenu'>
 			<li><a href="galery-artist-Compositeur">Compositeurs</a></li>
 			<li><a href="galery-artist-Interprete">Interpretes</a></li>
+			<li><a href="galery-event">Événements</a></li>
 		</ul></li>
 </ul>
 <ul id="menu-droit">

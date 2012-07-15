@@ -6,7 +6,6 @@
 					$error[]= "<span style='color:red;'>Veuillez saisir une recherche!</span>";
 				}
 				if(empty($error)){
-					
 					resultat_recherche($search,$table);
 				}
 				else{

@@ -127,6 +127,37 @@ hr{
  	height: 1px;
  	border: 0;
 }
+#mapdescri{
+	width:500px;
+	color:red;
+	margin-left: auto;
+	margin-right: auto;
+	word-wrap:breapxword;
+	text-align:justify;
+}
+#maps{
+	width:500px;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	border:solid 1px #000;
+}
+#mapsv{
+	background: #1d5f1d url(../sources/galery-artist.png);
+	width:150px;
+	height:30px;
+	line-height:30px;
+	color:#fff;
+	text-align:center;
+	margin-top:10px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+
+}
+#mapsv:hover{
+	background-position: 0px 208px;
+}
 #menufond
 {
   background: #1d5f1d url(../sources/menufond.png);
@@ -357,6 +388,10 @@ hr{
 }
 #partenaires a:hover{
 	color:#1d5f1d;
+}
+#restevent{
+	position: relative;
+	top:450px;
 }
 #sel{
 	background-color:#fff;

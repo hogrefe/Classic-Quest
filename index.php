@@ -18,6 +18,11 @@
 				$rowb = recup_enreg($idart);  
 				echo "<title>$rowb[7]</title>";
 			}
+			elseif(preg_match("/pages\/event/",$_GET['page'])){
+				$idevent =  substr($_GET["page"], 11, -4);
+				$rowb = recup_event($idevent);  
+				echo "<title>$rowb[1]</title>";
+			}
 			elseif(preg_match("/admin/",$_GET['page'])){ 
 				echo "<title>Connexion & Inscription</title>";
 			}
@@ -36,12 +41,15 @@
 			elseif(preg_match("/galery-artist-Interprete/",$_GET['page'])){ 
 				echo "<title>Galerie des interpretes</title>";
 			}
+			elseif(preg_match("/galery-event/",$_GET['page'])){ 
+				echo "<title>Galerie des événements</title>";
+			}
 			else{
-				echo "<title>Classic Quest</title>";
+				echo "<title>Classic Quest - Retrouvez les biographies des compositeurs et interpretes de la musique classique</title>";
 			}
 		}
 		else{
-			echo "<title>Classic Quest</title>";
+			echo "<title>Classic Quest - Retrouvez les biographies des compositeurs et interpretes de la musique classique</title>";
 		}
 		?>
 		<!-- Les verificaiton moteur de recherche -->
@@ -137,6 +145,10 @@
 							$id =  substr($_GET["page"], 12, -4);
 							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
 						}
+						elseif(preg_match("/pages\/event/",$_GET['page'])){
+							$id =  substr($_GET["page"], 11, -4);
+							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
+						}
 						// on decoupe l'artist de son id
 						elseif(preg_match("/pages\/mod-artist/",$_GET['page'])){
 							$id =  substr($_GET["page"], 16, -4);
@@ -147,7 +159,7 @@
 							$id =  substr($_GET["page"], 18, -4);
 							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
 						}
-						// on decoupe l'artist de son id
+						// on decoupe l'enregistrement de son id
 						elseif(preg_match("/pages\/suppr-enreg/",$_GET['page'])){
 							$id =  substr($_GET["page"], 17, -4);
 							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
@@ -175,7 +187,17 @@
 							$id =  substr($_GET["page"], 15, -4);
 							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
 						}
-						// on decoupe l'enregistrement de son id
+						// on decoupe l'evenement de son id
+						elseif(preg_match("/pages\/mod-event/",$_GET['page'])){
+							$id =  substr($_GET["page"], 15, -4);
+							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
+						}
+						// on decoupe l'evenement de son id
+						elseif(preg_match("/pages\/suppr-event/",$_GET['page'])){
+							$id =  substr($_GET["page"], 17, -4);
+							$temp = substr($_GET["page"], 6,-(strlen($id)+4));
+						}
+						// on decoupe l'user de son id
 						elseif(preg_match("/pages\/validation/",$_GET['page'])){
 							$id =  substr($_GET["page"], 16, -4);
 							if(preg_match("/ok/",$id)){
@@ -231,6 +253,12 @@
 	    $(function(){
 	        $('a.zoombox').zoombox();
 	    });
+		$(document).ready(function(){
+			$("#mapsv").click(function(){
+				var lieu = $("#lieu").val();
+				$("#maps").html("<iframe frameborder='0' height='500' marginheight='0' marginwidth='0' scrolling='no' src='http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q="+lieu+"&amp;output=embed' width='500'></iframe><br /></div>");
+			});
+		});
 	//]]>
 </script>
 </html>

@@ -54,6 +54,19 @@
 		}
 	}
 
+	//recupere les infos de l'evenement
+	function recup_event($id){
+		include('bdd.php');
+		$query = "SELECT * FROM evenement ORDER BY id";
+		$result = mysql_query($query);
+		// Recuperation des resultats
+		while($row = mysql_fetch_row($result)){
+			if ($row[0] == htmlentities(trim($id))){
+				return $row;
+			}
+		}
+	}
+
 	//recupere les infos de l'user
 	function recup_user($id){
 		include('bdd.php');

@@ -7,6 +7,19 @@
 	}
 	include('bdd.php');
 	if(isset($_POST['suppr'])){
+		// kill des images.
+		if(file_exists("sources/images/".$id.".jpg")){
+			unlink("sources/images/".$id.".jpg");
+		}
+		elseif(file_exists("sources/images/".$id.".gif")){
+			unlink("sources/images/".$id.".gif");
+		}
+		elseif(file_exists("sources/images/".$id.".png")){
+			unlink("sources/images/".$id.".png");
+		}
+		if(file_exists("sources/images/min/".$id.".jpg")){
+			unlink("sources/images/min/".$id.".jpg");
+		}
 		$sql = "DELETE FROM `enregistrement` WHERE `idartist` = $id";
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$sql = "DELETE FROM `artist` WHERE `id` = $id";

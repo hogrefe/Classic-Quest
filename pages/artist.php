@@ -1,7 +1,7 @@
 <?php
 	if(isset($id)){
-	//
 	$artist = recup_artist($id);
+	if(!empty($artist)){
 	$neele = Decoupedatetime($artist[3]);
 	$mortle =  Decoupedatetime($artist[5]);
 	echo "<center><h1>$artist[1]</h1></center>
@@ -16,8 +16,8 @@
 			$res ="";
 			while($i != count($array)){
 				if(file_exists("sources/images/".$id.".".$array[$i])){
-					$mdcinq = md5_file("sources/images/min/$id.$array[$i]");
-					$res = "<a class='zoombox zgallery1' href='sources/images/$id.$array[$i]?<?php echo".$mdcinq."; ?>'><img src='sources/images/min/$id.$array[$i]?<?php echo".$mdcinq."; ?>' class='profil-photo' alt='".$artist[1]."' /></a>";
+					$mdcinq = md5_file("sources/images/min/$id.jpg");
+					$res = "<a class='zoombox zgallery1' href='sources/images/$id.$array[$i]?<?php echo".$mdcinq."; ?>'><img src='sources/images/min/$id.jpg?<?php echo".$mdcinq."; ?>' class='profil-photo' alt='".$artist[1]."' /></a>";
 				}
 				$i++;
 			}
@@ -77,7 +77,15 @@
 				  </table>";
 			}
 			echo "</div>";
-	}else {
+		}
+		else {
+		//redirection
+		echo '<SCRIPT LANGUAGE="JavaScript">
+				document.location.href="index.php"
+			</SCRIPT>';
+		}
+	}
+	else {
 		//redirection
 		echo '<SCRIPT LANGUAGE="JavaScript">
 				document.location.href="index.php"
