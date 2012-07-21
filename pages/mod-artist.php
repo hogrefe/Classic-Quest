@@ -69,17 +69,24 @@
 					<tr><td><label for='mortle'>Décédé(e) le : </label><input type='text' name='mortle' value='".$mortle."' /></td>
 					<td><label for='morta'> à : </label><input type='text' name='morta' value='".$artist[6]."' /></td></tr>
 					<tr><td><label for='typeartist'>L'artiste est un : </label>
-					<select name='typeartist'>
-						<option value='Compositeur' ";
+					<select name='typeartist'>";
+					// compositeur
+					echo "<option value='Compositeur' ";
 						if($artist[10] == "Compositeur"){
 							echo " selected='selected'";
 						}
-						echo ">Compositeur</option>
-						<option value='Interprete' ";
-						if($artist[10] == "Interprete"){
+						echo ">Compositeur</option><hr />";
+						// interprete
+						echo "<option value='Flûtiste' ";
+						if($artist[10] == "Flûtiste"){
 							echo " selected='selected'";
 						}
-						echo ">Interprete</option>
+						echo ">Flûtiste</option>
+						<option value='Violoniste' ";
+						if($artist[10] == "Violoniste"){
+							echo " selected='selected'";
+						}
+						echo ">Violoniste</option>
 					</select></td></tr>
 				</table>
 				<h3>Biographie :</h3><br />

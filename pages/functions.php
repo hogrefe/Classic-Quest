@@ -99,6 +99,8 @@
 		$results = array();
 		if($artisttype == ''){
 			$restypeartist = '';
+		}elseif ($artisttype != 'Compositeur'){
+			$restypeartist = "WHERE typeartist != 'Compositeur'";
 		}else $restypeartist = "WHERE typeartist = '$artisttype'";
 		if($lettre == ''){
 			$sql = mysql_query("SELECT * FROM artist ".$restypeartist." ORDER BY nomartist ASC");
@@ -245,6 +247,42 @@
 				$i++;
 			}
 		}
+		if($table == "evenement"){ 		// evenement
+			$i = 0;
+			foreach($s as $mot){
+				if(strlen($mot)>3){
+					if($i == 0){
+						$sql.=" WHERE ";
+					}
+					else{
+						$sql.= " OR ";
+					}
+					$sql.=" nom LIKE '%$mot%'";
+				}
+				$i++;
+			}
+			$i = 0;
+			foreach($s as $mot){
+				if(strlen($mot)>3){
+					$sql.= " OR date LIKE '%$mot%'";
+				}
+				$i++;
+			}
+			$i = 0;
+			foreach($s as $mot){
+				if(strlen($mot)>3){
+					$sql.= " OR lieu LIKE '%$mot%'";
+				}
+				$i++;
+			}
+			$i = 0;
+			foreach($s as $mot){
+				if(strlen($mot)>3){
+					$sql.= " OR detail LIKE '%$mot%'";
+				}
+				$i++;
+			}
+		}
 		$req=mysql_query($sql) or die( mysql_error());
 		echo "<h3><center>".mysql_num_rows($req)." resultat(s) pour la recherche : '".$search."'.</center></h3><br />";
 		echo "<span id='search'>";
@@ -254,6 +292,9 @@
 			}
 			if($table == "enregistrement"){
 				echo "<a href='enreg{$d["id"]}'><strong>{$d["titre"]}</strong><br /></a>";
+			}
+			if($table == "evenement"){
+				echo "<a href='event{$d["id"]}'><strong>{$d["nom"]}</strong><br /></a>";
 			}
 		}
 		echo "</span>";

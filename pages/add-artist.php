@@ -70,7 +70,8 @@
 				<tr><td><label for='typeartist'>L'artiste est un : </label>
 					<select name='typeartist'>
 						<option value='Compositeur'>Compositeur</option>
-						<option value='Interprete'>Interprete</option>
+						<option value='Flûtiste'>Flûtiste</option>
+						<option value='Violoniste'>Violoniste</option>
 					</select></td></tr>
 			</table>
 			<h3>Biographie :</h3><br />

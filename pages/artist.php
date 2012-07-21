@@ -9,7 +9,8 @@
 			<table border='0' width='100%' style='font-size:18px;'>
 				<td>Nom complet de l'artiste : $artist[2]<br />
 					Née le $neele à $artist[4]<br />
-					Décédé(e) le $mortle à $artist[6] <br /></td><td>";
+					Décédé(e) le $mortle à $artist[6] <br />
+					L'artiste est un $artist[10]</td><td>";
 			// image artist
 			$array = array("jpg","png","gif","JPG","PNG","GIF");
 			$i = 0;

@@ -1,3 +1,15 @@
+.acccompog a{
+	text-decoration: none;
+	color:#000;
+}
+.acccompog{
+	background-color:#fff;
+	display: block;
+}
+.acccompog:hover{
+	background-color:#ddb;
+	display: block;
+}
 .auteur{
 	float:right;
 	color:#555;
@@ -144,7 +156,7 @@ hr{
 }
 #mapsv{
 	background: #1d5f1d url(../sources/galery-artist.png);
-	width:150px;
+	width:200px;
 	height:30px;
 	line-height:30px;
 	color:#fff;
@@ -157,6 +169,11 @@ hr{
 }
 #mapsv:hover{
 	background-position: 0px 208px;
+}
+#mapsv a{
+	text-decoration: none;
+	color: #fff;
+	display: block;
 }
 #menufond
 {
@@ -387,7 +404,7 @@ hr{
 	color:#000;
 }
 #partenaires a:hover{
-	color:#1d5f1d;
+	color:#F00;
 }
 #restevent{
 	position: relative;

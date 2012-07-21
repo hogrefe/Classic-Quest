@@ -2,8 +2,8 @@
 			if(isset($_POST['submit'])){
 				$search = addslashes($_POST['search']); // securite pour la recherche
 				$table = addslashes($_POST['table']);
-				if(empty($search)){ // s'il est vide
-					$error[]= "<span style='color:red;'>Veuillez saisir une recherche!</span>";
+				if(strlen($search) <= 3){ // s'il est vide
+					$error[]= "<br /><span style='color:red;'>Veuillez saisir une recherche de plus de 3 caractères!</span>";
 				}
 				if(empty($error)){
 					resultat_recherche($search,$table);

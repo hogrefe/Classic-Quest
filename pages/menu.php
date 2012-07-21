@@ -6,7 +6,7 @@
 		<ul class='sousMenu'>
 			<li><a href="galery-artist-Compositeur">Compositeurs</a></li>
 			<li><a href="galery-artist-Interprete">Interpretes</a></li>
-			<li><a href="galery-event">Événements</a></li>
+			<li><a href="galery-event">Évènements</a></li>
 		</ul></li>
 </ul>
 <ul id="menu-droit">
@@ -23,7 +23,7 @@
 	 		echo "<ul class='sousMenu'>";
 	 			echo "<li><a href='add-artist'>Artiste</a></li>";
 		 		echo "<li><a href='add-enreg'>Enregistrement</a></li>";
-		 		echo "<li><a href='add-event'>Événement</a></li>";
+		 		echo "<li><a href='add-event'>Évènement</a></li>";
 		 	echo "</ul></li>";
 	 	} else {
 	 		echo '<li><a href="admin">Connexion</a></li>';

@@ -23,7 +23,7 @@
 				Prévu le : <strong>".Decoupedatetime($event[2])."</strong><br />
 				Prévu à cette adresse : <strong>$event[3]</strong><br />";
 	if(isset($_SESSION['username'])){
-		echo "<br /><a href='mod-event".$id."'>Modifier l'événement</a> - <a href='suppr-event".$id."'>Supprimer l'événement</a>";
+		echo "<br /><a href='mod-event".$id."'>Modifier l'évènement</a> - <a href='suppr-event".$id."'>Supprimer l'évènement</a>";
 	}
 	echo 	"<br /><div id='mapdescri'><strong>Attention cette carte est a titre indicatif, en aucun cas le lieu designer par celle si
 			ne sera vérifier. Seul l'adresse écrit devra être exacte.</strong></div><br /><div id ='maps' style='text-align: center;'>

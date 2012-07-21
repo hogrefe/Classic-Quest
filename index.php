@@ -42,7 +42,7 @@
 				echo "<title>Galerie des interpretes</title>";
 			}
 			elseif(preg_match("/galery-event/",$_GET['page'])){ 
-				echo "<title>Galerie des événements</title>";
+				echo "<title>Galerie des évènements</title>";
 			}
 			else{
 				echo "<title>Classic Quest - Retrouvez les biographies des compositeurs et interpretes de la musique classique</title>";
@@ -129,8 +129,9 @@
 				<form method="POST" action="search">
 					<input type="text" name="search" size="100" />
 					<input type="submit" name="submit" value="Rechercher" /><br />
-					<input type="radio" name="table" value="artist" <?php if((isset($_POST['table']) && $_POST['table'] == "artist") || empty($_POST['table'])) echo 'checked="checked"'; ?> />Artistes
- 					<input type="radio" name="table" value="enregistrement" <?php if(isset($_POST['table']) && $_POST['table'] == "enregistrement") echo 'checked="checked"'; ?> />Enregistrements<br />
+					<br /><input type="radio" name="table" value="artist" <?php if((isset($_POST['table']) && $_POST['table'] == "artist") || empty($_POST['table'])) echo 'checked="checked"'; ?> />Artistes
+ 					<input type="radio" name="table" value="enregistrement" <?php if(isset($_POST['table']) && $_POST['table'] == "enregistrement") echo 'checked="checked"'; ?> />Enregistrements
+ 					<input type="radio" name="table" value="evenement" <?php if(isset($_POST['table']) && $_POST['table'] == "evenement") echo 'checked="checked"'; ?> />Évènement<br />
 				</form>
 				<br /><hr />
 			</div>
@@ -246,19 +247,8 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" src="js/jquery-1.7.min.js"></script> 
+	<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
 	<script type="text/javascript" src="js/zoombox.js"></script>
-	<script type="text/javascript"> 
-	//<![CDATA[
-	    $(function(){
-	        $('a.zoombox').zoombox();
-	    });
-		$(document).ready(function(){
-			$("#mapsv").click(function(){
-				var lieu = $("#lieu").val();
-				$("#maps").html("<iframe frameborder='0' height='500' marginheight='0' marginwidth='0' scrolling='no' src='http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q="+lieu+"&amp;output=embed' width='500'></iframe><br /></div>");
-			});
-		});
-	//]]>
-</script>
+	<script type="text/javascript" src="js/monjs.js"></script>
 </html>

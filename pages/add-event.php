@@ -46,10 +46,10 @@
 			echo '<SCRIPT LANGUAGE="JavaScript">
 					document.location.href="index.php"
 				</SCRIPT>';
-		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le nom, la date e tle lieu de l'événement!</span></b>";
+		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le nom, la date e tle lieu de l'évènement!</span></b>";
 	}
 	echo 	"<div id='mod'>
-			<center><h2>Ajouter un événement.</h2></center>
+			<center><h2>Ajouter un évènement.</h2></center>
 			<form method='POST' action='' enctype='multipart/form-data'>
 				<center>Uploader une image (jpg,png,gif et inférieur a 1Mo) : <input type='file' name='img' /></center>
 				<table border='0' width='100%'>

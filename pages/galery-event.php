@@ -1,4 +1,4 @@
-<center><h2>Galerie des Événements à venir.</h2></center>
+<center><h2>Galerie des Évènements à venir.</h2></center>
 <?php
 	include('bdd.php');
 	$results = array();
@@ -7,7 +7,7 @@
 			$results[] = $row; 
 	}
 	if(count($results) == 0){
-		echo "<span style='color:red;'>Pas de nouveau événements enregistrés.</span>";
+		echo "<span style='color:red;'>Pas de nouveau évènements enregistrés.</span>";
 	}else{
 		echo "<ul id='galery-artist'>";
 		foreach ($results as $result) {
