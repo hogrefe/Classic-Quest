@@ -1,6 +1,22 @@
 $(document).ready(function(){
 	// zoombox
-  	$('a.zoombox').zoombox();	
+  	$('a.zoombox').zoombox();
+  	//subscribe
+  	$("#subface a").mouseover(function() {
+  		$("#subface img").stop(true, true).fadeIn(500);
+	}).mouseout(function() {
+  		$("#subface img").stop(true, true).fadeOut(500);
+	});
+  	$("#subrss a").mouseover(function() {
+  		$("#subrss img").stop(true, true).fadeIn(500);
+	}).mouseout(function() {
+  		$("#subrss img").stop(true, true).fadeOut(500);
+	});
+	$("#submail a").mouseover(function() {
+  		$("#submail img").stop(true, true).fadeIn(500);
+	}).mouseout(function() {
+  		$("#submail img").stop(true, true).fadeOut(500);
+	});
 	// maps
 	$("#mapsv").click(function(){
 		var lieu = $("#lieu").val();

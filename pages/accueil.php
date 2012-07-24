@@ -4,7 +4,10 @@
 	$results = array();
 	// suppr les event passés
 	$sql = mysql_query("DELETE FROM evenement WHERE TO_DAYS(date) - TO_DAYS(NOW()) < 0");
+	// supprimer les images inutiles
+	
 	//afficher les futur evenement
+	$results = array();
 	$sql = mysql_query("SELECT * FROM evenement order by date ASC limit 0,3");
 	while($row = mysql_fetch_assoc($sql)){
 		$results[] = $row; 

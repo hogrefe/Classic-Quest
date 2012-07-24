@@ -30,7 +30,6 @@
 	
 	//recupere les infos de l'artist
 	function recup_artist($id){
-		include('bdd.php');
 		$query = "SELECT * FROM artist ORDER BY id";
 		$result = mysql_query($query);
 		// Recuperation des resultats
@@ -43,7 +42,6 @@
 
 	//recupere les infos de l'enregistrment
 	function recup_enreg($id){
-		include('bdd.php');
 		$query = "SELECT * FROM enregistrement ORDER BY id";
 		$result = mysql_query($query);
 		// Recuperation des resultats
@@ -56,7 +54,6 @@
 
 	//recupere les infos de l'evenement
 	function recup_event($id){
-		include('bdd.php');
 		$query = "SELECT * FROM evenement ORDER BY id";
 		$result = mysql_query($query);
 		// Recuperation des resultats
@@ -69,7 +66,6 @@
 
 	//recupere les infos de l'user
 	function recup_user($id){
-		include('bdd.php');
 		$query = "SELECT * FROM users ORDER BY id";
 		$result = mysql_query($query);
 		// Recuperation des resultats
@@ -95,7 +91,6 @@
 
     // galery artist
 	function afficher_artist($lettre,$artisttype){ 		// affiche les element de la page demander
-    	include('bdd.php');
 		$results = array();
 		if($artisttype == ''){
 			$restypeartist = '';
@@ -113,7 +108,6 @@
 
 	// galery nouveauté
 	function afficher_nouveaute(){ 		// affiche les element de la page demander
-    	include('bdd.php');
 		$results = array();
 		$sql = mysql_query("SELECT * FROM artist order by id desc limit 0,10");
 		while($row = mysql_fetch_assoc($sql)){
@@ -124,7 +118,6 @@
 
 	// afficher liste d'enregistrements
 	function afficher_enregistrement($id){
-		include('bdd.php');
 		$result = array();
 		$ssql = mysql_query("SELECT * FROM enregistrement WHERE idartist = $id ORDER BY annee ASC");
 		while($srow = mysql_fetch_assoc($ssql)){
@@ -165,7 +158,6 @@
 
 	//moteur de recherche du site recherche
 	function resultat_recherche($search,$table){
-		include('bdd.php');
 		$s=explode(" ",$search);
 		$sql="SELECT * FROM $table";
 		if($table == "artist"){ 				// artist

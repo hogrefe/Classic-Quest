@@ -29,11 +29,11 @@
 				echo $res;
 			}
 			echo "</td>
-			</table>";
+			</table><br /><div id='mapsv'><a href='outils/pdf.php'>Télécharger la fiche (PDF)</a></div>";
 			if(isset($_SESSION['username'])){
-				echo 		"<br /><a href='mod-artist".$id."'>Modifier l'artiste</a> - <a href='suppr-artist".$id."'>Supprimer l'artiste</a>";
+				echo 		"<div id='mapsv'><a href='mod-artist".$id."'>Modifier l'artiste</a></div><div id='mapsv'><a href='suppr-artist".$id."'>Supprimer l'artiste</a></div>";
 			}
-			echo "</div>
+			echo "<br /><br /><br /></div>
 			<div>
 			<hr />";
 			if($artist[7] != ""){

@@ -1,3 +1,48 @@
+/* reset */
+html, body, div, span, applet, object, iframe, 
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: middle;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* Mon css ici */
 .acccompog a{
 	text-decoration: none;
 	color:#000;
@@ -58,7 +103,7 @@ body{
 }
 #cont-rest{
 	width:100%;
-	top:410px;
+	top:250px;
 	position: relative;
 	text-align:justify;
 	height:auto;
@@ -165,7 +210,8 @@ hr{
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
-
+	float:left;
+	margin-left:10px;
 }
 #mapsv:hover{
 	background-position: 0px 208px;
@@ -435,6 +481,36 @@ hr{
 	background-color:#1d5f1d;
 	color:#A9FE9C;
 
+}
+#subdroit{
+	width:30%;
+}
+#subdroit img{
+	display: none;
+}
+#subface a{
+	background-image:url(../sources/facebookout.png);
+	width:64px;
+	height:64px;
+	background-position: 0px 0px;
+	display: block;
+	float:right;
+}
+#subrss a{
+	background-image:url(../sources/rssout.png);
+	width:64px;
+	height:64px;
+	background-position: 0px 0px;
+	display: block;
+	float:right;
+}
+#submail a{
+	background-image:url(../sources/mailout.png);
+	width:64px;
+	height:64px;
+	background-position: 0px 0px;
+	display: block;
+	float:right;
 }
 table {
    border-collapse: collapse;

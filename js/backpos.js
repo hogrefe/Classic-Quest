@@ -1,0 +1,6 @@
+﻿/************************************************************************************************************
+ *
+ *  Background-Position Animations - http://www.corrupt-system.de/jquery/backgroundPosition/
+ * 
+*************************************************************************************************************/
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(f($){$.G($.5.x,{e:f(5){H(5.v==0&&A 5.7==\'B\'){b 6=$.q(5.m,\'e\');6=h(6);5.6=[6[0],6[2]];b 7=h(5.7);5.7=[7[0],7[2]];5.i=[7[1],7[3]]}b 9=[];9[0]=((5.7[0]-5.6[0])*5.n)+5.6[0]+5.i[0];9[1]=((5.7[1]-5.6[1])*5.n)+5.6[1]+5.i[1];5.m.F.e=9[0]+\' \'+9[1];f h(8){8=8.c(/r|t/g,\'u\');8=8.c(/w|y/g,\'z%\');8=8.c(/(\\d+)(\\s|\\)|$)/g,"$D$2");b a=8.p(/(\\d+)(k|\\%|l|j)\\s(\\d+)(k|\\%|l|j)/);C[o(a[1]),a[2],o(a[3]),a[4]]}}})})(E);',44,44,'|||||fx|start|end|strg|nowPosX|res|var|replace||backgroundPosition|function||toArray|unit|pt|px|em|elem|pos|parseFloat|match|curCSS|left||top|0px|state|right|step|bottom|100|typeof|string|return|1px|jQuery|style|extend|if'.split('|'),0,{}));

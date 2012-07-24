@@ -19,7 +19,7 @@
 					</td>
 				</table>";
 				if(isset($_SESSION['username'])){
-					echo "<br /><a href='mod-enreg".$id."'>Modifier l'enregistrement</a> - <a href='suppr-enreg".$id."'>Supprimer l'enregistrement</a>";
+					echo "<br /><div id='mapsv'><a href='mod-enreg".$id."'>Modifier l'enregistrement</a></div><div id='mapsv'><a href='suppr-enreg".$id."'>Supprimer l'enregistrement</a></div><br /><br /><br />";
 				}
 			echo "</div>
 				<hr />";

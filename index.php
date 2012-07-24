@@ -57,7 +57,7 @@
 		<meta name="msvalidate.01" content="734EC8B806B3910A95B2452CC192D1B9" />
 		<!-- Info du site  -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="Description" content="Gallerie des compositeurs et enregistrements de la musique classique, ecrit par les utilisateurs inscrit." />
+		<meta name="Description" content="Galerie des compositeurs et enregistrements de la musique classique, ecrit par les utilisateurs inscrit." />
 		<meta name="Keywords" content="musique, classique, classic, beethoven, roques, steve, haris, seldon, jquery, php, css, js, mozart, bach, luc, sonneur, opengeek, github, gratuit, inscrit, connecter, redacteur, compositeur, enregistrement, opus, oeuvre, baroque, interprete, lieu, date, biographie, histoire, biography" />
 		<meta name="Subject" content="Musique classique" />
 		<meta name="Author" content="Roques Steve" />
@@ -124,16 +124,25 @@
 		<?php include('pages/menu.php'); ?>
 		<div id="contenu">
 			<div id="cont-top">
-				<img src="sources/classic-quest.png" alt="Classic Quest" height="250px" />
-				<h2>Que recherchez vous?</h2>
-				<form method="POST" action="search">
-					<input type="text" name="search" size="100" />
-					<input type="submit" name="submit" value="Rechercher" /><br />
-					<br /><input type="radio" name="table" value="artist" <?php if((isset($_POST['table']) && $_POST['table'] == "artist") || empty($_POST['table'])) echo 'checked="checked"'; ?> />Artistes
- 					<input type="radio" name="table" value="enregistrement" <?php if(isset($_POST['table']) && $_POST['table'] == "enregistrement") echo 'checked="checked"'; ?> />Enregistrements
- 					<input type="radio" name="table" value="evenement" <?php if(isset($_POST['table']) && $_POST['table'] == "evenement") echo 'checked="checked"'; ?> />Évènement<br />
-				</form>
-				<br /><hr />
+				<center><table border="0" WIDTH='90%'>
+					<td WIDTH='50%'><img src="sources/classic-quest.png" alt="Classic Quest" width="100%" /></td>
+					<td id='subdroit'>
+						<span id='subface'><a target="_blank" href="https://www.facebook.com/ClassicQuest"><img src="sources/facebook.png" alt="Notre page Facebook (officiel)" title="Notre page Facebook (officiel)" /></a></span>
+									<span id='submail'><a target="_blank" href="mailto:haris.seldon@gmail.com"><img src="sources/mail.png" alt="Contactez-nous" title="Contactez-nous" /></a></span>
+									<span id='subrss'><a target="_blank" href="outils/rss.php"><img src="sources/rss.png" alt="rss" title="rss" /></a></span>			
+						</span>
+						<br /><br /><br /><br /><h2>Que recherchez vous?</h2>
+						<form method="POST" action="search">
+							<input type="text" name="search" />
+							<input type="submit" name="submit" value="Rechercher" /><br />
+							<br /><input type="radio" name="table" value="artist" <?php if((isset($_POST['table']) && $_POST['table'] == "artist") || empty($_POST['table'])) echo 'checked="checked"'; ?> />Artistes
+		 					<input type="radio" name="table" value="enregistrement" <?php if(isset($_POST['table']) && $_POST['table'] == "enregistrement") echo 'checked="checked"'; ?> />Enregistrements
+		 					<input type="radio" name="table" value="evenement" <?php if(isset($_POST['table']) && $_POST['table'] == "evenement") echo 'checked="checked"'; ?> />Évènement<br />
+						</form>
+						<br />
+					</td>
+				</table></center>
+				<hr />
 			</div>
 			<div id="cont-rest">
 				<?php 
@@ -241,7 +250,9 @@
 			- <a href="https://www.facebook.com/groups/358656437504076/" target="_blank">OpenGeek</a>
 			<div id='partenaires'>
 				<h3>Nos partenaires :</h3>
-				<a href="http://harisseldon.blogspot.fr/" target="_blank">HariS Seldon</a>
+				<a href="http://michelroques.blogspot.fr/" target="_blank">Michel Roques (Blog officiel de l'auteur.)</a>
+				- <a href="http://www.lulu.com/product/couverture-souple/le-sixième-siège/11060245" target="_blank">Le Sixième siège (Achetez le livre sur lulu.com)</a>
+				- <a href="http://harisseldon.blogspot.fr/" target="_blank">HariS Seldon</a>
 				- <a href="http://leopol-dine.blogspot.fr/" target="_blank">Leopol-dine</a>
 				- <a href="http://aary-fr.blogspot.fr/" target="_blank">AARY</a>
 			</div>
@@ -249,6 +260,7 @@
 	</body>
 	<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 	<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="js/backpos.js"></script>
 	<script type="text/javascript" src="js/zoombox.js"></script>
 	<script type="text/javascript" src="js/monjs.js"></script>
 </html>

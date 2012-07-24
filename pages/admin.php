@@ -27,6 +27,68 @@
 			}else $error[] = "Nom d'utilisateur ou mots de passe incorrecte!";
 		}else $error[] = "Si vous voulez vous connecter, veuillez saisir tous les champs du formulaire prévu à cet effet!";
 	}
+	// mots de passe perdu?
+	if (isset($_POST['mdpperdu'])) {
+		if ((isset($_POST['login']) && !empty($_POST['login']))) {
+			// on teste si une entr?e de la base contient ce couple login / pass
+			$req = mysql_query("SELECT count(*) FROM `users` WHERE email ='".$_POST['login']."'");
+			$data = mysql_fetch_array($req);
+			mysql_free_result($req);
+			// si on obtient une r?ponse, alors l'utilisateur est un membre
+			if ($data[0] == 1) {
+			$chrs = 8;
+			$chaine = ""; 
+			$list = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			mt_srand((double)microtime()*1000000);
+			$newstring="";
+			while( strlen( $newstring )< $chrs ) {
+				$newstring .= $list[mt_rand(0, strlen($list)-1)];
+			}
+				$sql = 'UPDATE users SET password="'.mysql_escape_string(md5($newstring)).'" WHERE email="'.mysql_escape_string($_POST['login']).'"';
+				mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());  
+				$mail = $_POST['login']; // D?claration de l'adresse de destination.
+				if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
+				{
+					$passage_ligne = "\r\n";
+				}
+				else
+				{
+					$passage_ligne = "\n";
+				}
+				$message_txt = "Votre nouveau mots de passe est :".$newstring;
+				$message_html = "<html><head></head><body>Votre nouveau mots de passe est :<b><i>".$newstring."</i></b>.<br />Pour plus de s?curit?, nous vous conseillons de modifier votre mots de passe dans la section modifier param?tres.<br />A bient?t!</body></html>";
+				$boundary = "-----=".md5(rand());
+				$sujet = "Nouveau mots de passe.";
+				$header = "From: \"Oxyde-max\"<oxyde-max@mail.fr>".$passage_ligne;
+				$header.= "Reply-to: \"Oxyde-max\"<oxyde-max@mail.fr>".$passage_ligne;
+				$header.= "MIME-Version: 1.0".$passage_ligne;
+				$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
+				$message = $passage_ligne."--".$boundary.$passage_ligne;
+				$message.= "Content-Type: text/plain; charset=\"ISO-8859-1\"".$passage_ligne;
+				$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+				$message.= $passage_ligne.$message_txt.$passage_ligne;
+				$message.= $passage_ligne."--".$boundary.$passage_ligne;
+				$message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
+				$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+				$message.= $passage_ligne.$message_html.$passage_ligne;
+				$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+				$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+				mail($mail,$sujet,$message,$header);
+				$erreur = "Votre nouveau mots de passe vous a ?t? envoy? sur votre adresse email.";
+			}
+			// si on ne trouve aucune r?ponse, le visiteur s'est tromp? soit dans son login, soit dans son mot de passe
+			elseif ($data[0] == 0) {
+				$erreur = 'Compte non reconnu.';
+			}
+			// sinon, alors la, il y a un gros probl?me :)
+			else {
+				$erreur = 'Prob?me dans la base de donn?es : plusieurs membres ont les m?mes identifiants de connexion.';
+			}
+		}
+		else {
+			$erreur = 'Au moins un des champs est vide.';
+		}
+}
 	// inscription----------------------------------------------------------------------------------------------------------
 	if(!empty($error)){
 		foreach ($error as $errors) { //errors est un tableau donc on peut avoir plusieur erreur, style profile nom...
@@ -76,6 +138,14 @@
 			<input type="password" name="password" /><br /><br />
 			<input type="submit" value="Connection" name="submit" />
 			<input type="submit" value="Effacer" name="nul" /><a name="inscrire"></a>
+		</form>
+		<hr />
+		<h2>Mots de passe perdu :</h2>
+		<form action="" method="post">
+			<table border="0">
+				<tr><td>Adresse email :</td><td><input type="text" name="login" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>"></td></tr>
+			</table>
+			<input type="submit" name="mdpperdu" value="Renvoyer un mot de passe"></center>
 		</form>
 		<hr />
 		<h1>S'inscrire</h1>

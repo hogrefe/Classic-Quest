@@ -1,7 +1,7 @@
 <div id="menufond">
 <ul id="menuDeroulant">
 	<li><a href="index.php"><strong>Classic Quest</strong></a></li>
-	<li><a href="accueil">Nouveautées</a></li>
+	<li><a href="accueil">Nouveautés</a></li>
 	<li><a href="#"> Les Galeries</a>
 		<ul class='sousMenu'>
 			<li><a href="galery-artist-Compositeur">Compositeurs</a></li>
