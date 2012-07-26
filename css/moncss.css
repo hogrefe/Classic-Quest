@@ -99,22 +99,7 @@ body{
 	overflow:none;
 	word-wrap:breapxword;
 	min-height:700px;
-	padding-bottom:500px;
-}
-#cont-rest{
-	width:100%;
-	top:250px;
-	position: relative;
-	text-align:justify;
-	height:auto;
-}
-#cont-top{
-	width:100%;
-	top:30px;
-	height:50px;
-	left:0;
-	position: absolute;
-	text-align: center;
+	padding-bottom:100px;
 }
 #enreg td {
 	border:solid 1px #1d5f1d;
@@ -122,7 +107,6 @@ body{
 	text-align:center;
 }
 #fin-galery-artist{
-	position: absolute;
 	top:45px;
 	width:100%;
 	text-align:center;

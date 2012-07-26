@@ -123,7 +123,8 @@
 	<body>
 		<?php include('pages/menu.php'); ?>
 		<div id="contenu">
-			<div id="cont-top">
+			<table border="0" width="100%">
+			<tr><td>
 				<center><table border="0" WIDTH='90%'>
 					<td WIDTH='50%'><img src="sources/classic-quest.png" alt="Classic Quest" width="100%" /></td>
 					<td id='subdroit'>
@@ -143,9 +144,8 @@
 					</td>
 				</table></center>
 				<hr />
-			</div>
-			<div id="cont-rest">
-				<?php 
+			</td></tr>
+			<tr><td>	<?php 
 					if(isset($_GET['page'])){
 						if(file_exists($_GET['page'])){
 							include($_GET['page']);
@@ -242,7 +242,7 @@
 						include('pages/accueil.php');
 					} 
 				?>
-			</div>
+			</td></tr></table>
 		</div>
 		<div id="bas">
 			Classic Quest - &copy; Copyright 2012 
