@@ -121,6 +121,22 @@
 <!-- /TinyMCE -->
 	</head>
 	<body>
+	<!-- Bouton Fcebook -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=195303913857626";
+			  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+	<!--End Facebook -->
+	<!--Boutojn google+1 -->
+	<!-- Place this tag in your head or just before your close body tag. -->
+		<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+		  	{lang: "fr"}
+		</script>
+	<!-- End g+1 -->
 		<?php include('pages/menu.php'); ?>
 		<div id="contenu">
 			<table border="0" width="100%">

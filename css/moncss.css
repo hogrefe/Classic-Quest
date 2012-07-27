@@ -499,3 +499,9 @@ hr{
 table {
    border-collapse: collapse;
 }
+/** social buton */
+#social{
+	margin: 0;
+	margin-left:20px;
+}
+.element{display:inline-block;margin: 0 20px 0 -15px;}
