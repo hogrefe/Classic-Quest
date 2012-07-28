@@ -158,7 +158,12 @@
 
 	//moteur de recherche du site recherche
 	function resultat_recherche($search,$table){
-		$s=explode(" ",$search);
+		$t=explode(" ",$search);
+		$s = array();
+		foreach($t as $kw){
+			$s=oubli_lettres($kw) + inversion_lettres($kw) + doubler_lettres($kw)
+			   + erreur_lettres_proches_azerty($kw) + erreur_lettres_proches_qwerty($kw);
+		}
 		$sql="SELECT * FROM $table";
 		if($table == "artist"){ 				// artist
 			$i = 0;
@@ -291,4 +296,171 @@
 		}
 		echo "</span>";
 	}
+
+	// Script generateur de faute de frappe pour moteur de recherhce
+		//oubli de lettres
+		function oubli_lettres($sld){
+			$array = preg_split('//',$sld);
+			$size = sizeof($array);
+			$size = $size - 1;
+			$temp = "";
+			$s = array();
+			for ($i = 1; $i < $size; $i++){
+				if (!strcmp($array[ $i]," ")) { continue; }
+				for ($x = 1; $x < $size; $x++) {
+					if ($x == $i) { continue; }
+					$temp = $temp . $array[ $x];
+				}
+				$s[] =$temp;
+				$temp = "";
+			}
+			return $s;
+		}
+		 
+		//Inversion lettres
+		function inversion_lettres($sld){
+			$temp = "";
+			$array = preg_split('//',$sld);
+			$size = sizeof($array);
+			$size = $size - 1;
+			$s = array();
+			for ($i = 1; $i < $size; $i++){
+				if (!strcmp($array[ $i]," ")) { continue; }
+				if (!strcmp($array[ $i],$array[ $i+1])) { continue; }
+				for ($x = 1; $x < $size; $x++){
+					if (($x == $i) and ($i < $size)) { $temp = $temp . $array[ $x+1]; }
+					else if ($x == ($i+1)) {$temp = $temp . $array[ $x-1]; }
+					else { $temp = $temp . $array[ $x]; }
+				}
+				$s[]=$temp;
+				$temp = "";
+			}
+			return $s;
+		}
+		 
+		//Doubler lettres
+		function doubler_lettres($sld){
+			$temp = "";
+			$array = preg_split('//',$sld);
+			$size = sizeof($array);
+			$size = $size - 1;
+			$s = array();
+			for ($i = 1; $i < $size; $i++){
+				if (!strcmp($array[ $i]," ")) { continue; }
+				for ($x = 1; $x < $size; $x++){
+					$temp = $temp . $array[ $x];
+					if ($x == $i) { $temp = $temp . $array[ $x] ; }
+				}
+				$s[]=$temp;
+				$temp = "";
+			}
+			return $s;
+		}
+		 
+		//Erreur communes clavier azerty
+		function erreur_lettres_proches_azerty($sld){
+			$alphabet = Array(
+			"a" => array("z"),
+			"z" => array("a", "e"),
+			"e" => array("z", "r"),
+			"r" => array("e", "t"),
+			"t" => array("r", "y"),
+			"y" => array("t", "u"),
+			"u" => array("y", "i"),
+			"i" => array("u", "o"),
+			"o" => array("i", "p"),
+			"p" => array("o"),
+			"q" => array("s"),
+			"s" => array("q", "d"),
+			"d" => array("s", "f"),
+			"f" => array("d", "g"),
+			"g" => array("f", "h"),
+			"h" => array("g", "j"),
+			"j" => array("h", "k"),
+			"k" => array("j", "l"),
+			"l" => array("k", "m"),
+			"m" => array("l"),
+			"w" => array("x"),
+			"x" => array("w", "c"),
+			"c" => array("x", "v"),
+			"v" => array("c", "b"),
+			"b" => array("v", "n"),
+			"n" => array("b")
+			);
+			$sld = strtolower($sld);
+			$s = array();
+			$array = preg_split('//',$sld);
+			$size = sizeof($array);
+			$size = $size - 1;
+			$temp = "";
+			for ($i = 1; $i < $size; $i++){
+				if (!strcmp($array[ $i]," ")) { continue; }
+				$current_letter = $array[$i];
+				if ( !$alphabet[$current_letter][0] ) { continue; }
+				$number_of_missed_keys = sizeof($alphabet[$current_letter]); 
+				for ($x = 0; $x < $number_of_missed_keys; $x++){
+					for ($z = 1; $z < $size; $z++){
+						if ($i == $z) { $temp = $temp . $alphabet[$current_letter][$x] ; }
+						else { $temp = $temp . $array[ $z]; }
+					}
+					$s[]=$temp;
+					$temp = "";
+				}
+			}
+			return $s;
+		}
+		
+		//Erreur communes clavier qwerty
+		function erreur_lettres_proches_qwerty($sld){
+			$alphabet = Array(
+			"q" => array("w"),
+			"w" => array("q", "e"),
+			"e" => array("w", "r"),
+			"r" => array("e", "t"),
+			"t" => array("r", "y"),
+			"y" => array("t", "u"),
+			"u" => array("y", "i"),
+			"i" => array("u", "o"),
+			"o" => array("i", "p"),
+			"p" => array("o"),
+			"a" => array("s"),
+			"s" => array("a", "d"),
+			"d" => array("s", "f"),
+			"f" => array("d", "g"),
+			"g" => array("f", "h"),
+			"h" => array("g", "j"),
+			"j" => array("h", "k"),
+			"k" => array("j", "l"),
+			"l" => array("k"),
+			"z" => array("x"),
+			"x" => array("z", "c"),
+			"c" => array("x", "v"),
+			"v" => array("c", "b"),
+			"b" => array("v", "n"),
+			"n" => array("b", "m"),
+			"m" => array("n")	
+			);
+			$sld = strtolower($sld);
+			$s = array();
+			$array = preg_split('//',$sld);
+			$size = sizeof($array);
+			$size = $size - 1;
+			$temp = "";
+			for ($i = 1; $i < $size; $i++){
+				if (!strcmp($array[ $i]," ")) { continue; }
+				$current_letter = $array[$i];
+				if ( !$alphabet[$current_letter][0] ) { continue; }
+				$number_of_missed_keys = sizeof($alphabet[$current_letter]); 
+				for ($x = 0; $x < $number_of_missed_keys; $x++){
+					for ($z = 1; $z < $size; $z++){
+						if ($i == $z) { $temp = $temp . $alphabet[$current_letter][$x] ; }
+						else { $temp = $temp . $array[ $z]; }
+					}
+					$s[]=$temp;
+					$temp = "";
+				}
+			}
+			return $s;
+		}
+		////////////////////////Fin Fonctions/////////////////////////
 ?>

@@ -114,7 +114,7 @@
 		$results[] = $row; 
 	}
 	if(count($results) > 0){
-		echo	"<div><br /><br /><hr /><center><h2>Les derniers interprètes ajoutés ou modifiés.</h2></center>";
+		echo	"<div><br /><br /><br /><hr /><center><h2>Les derniers interprètes ajoutés ou modifiés.</h2></center>";
 		$t = 0;
 		foreach ($results as $result) {
 			$id = $result['id'];
@@ -177,7 +177,7 @@
 		echo "<div id='mapsv'><a href='galery-artist-Interprete'>Les autres interprètes</a></div></div>";
 	}
 ?>
-<div><br /><br /><hr />
+<div><br /><br /><br /><hr />
 <center><h2>Les derniers enregistrements ajoutés ou modifiés.</h2></center>
 <?php
 	// ENREGISTREMENT
