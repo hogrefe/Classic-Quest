@@ -1,4 +1,7 @@
 Chose restante a faire :
-	lexique
-	nettoyer image quand suppr evenement ou artist.
+	Enreg partition pour piano, violon, ...
+
+------------------------------------------------------------------------------------------------------
+	Lulu.com deux version encyclopedie, normaliser et fiche technique.
+
 	

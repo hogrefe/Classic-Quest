@@ -23,7 +23,7 @@
 				Prévu le : <strong>".Decoupedatetime($event[2])."</strong><br />
 				Prévu à cette adresse : <strong>$event[3]</strong><br />";
 	if(isset($_SESSION['username'])){
-		echo "<br /><table><tr></td><a href='mod-event".$id."'>Modifier l'évènement</a></div><div id='mapsv'><a href='suppr-event".$id."'>Supprimer l'évènement</a></div>";
+		echo "<br /><table><tr></td><div id='mapsv'><a href='mod-event".$id."'>Modifier l'évènement</a></div><div id='mapsv'><a href='suppr-event".$id."'>Supprimer l'évènement</a></div>";
 	}
 	echo 	"<br /><br /><br /><div id='mapdescri'><strong> Attention, cette carte est proposée à titre indicatif, mais en aucun cas le lieu désigné par celle-ci ne sera vérifié. Seule l'adresse écrite dans le cartouche est certifiée.</strong></div><br /><div id ='maps' style='text-align: center;'>
 			<iframe frameborder='0' height='500' marginheight='0' marginwidth='0' scrolling='no' src='http://maps.google.fr/maps?f=q&amp;source=s_q&amp;hl=fr&amp;geocode=&amp;q=".$event[3]."&amp;output=embed' width='500'></iframe><br /></div>

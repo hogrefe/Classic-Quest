@@ -5,7 +5,70 @@
 	// suppr les event passés
 	$sql = mysql_query("DELETE FROM evenement WHERE TO_DAYS(date) - TO_DAYS(NOW()) < 0");
 	// supprimer les images inutiles
-	
+	$dir_nom = 'sources/images/'; // dossier listé (pour lister le répertoir courant : $dir_nom = '.'  --> ('point')
+	$dir = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
+	$fichier= array(); // on déclare le tableau contenant le nom des fichiers
+	while($element = readdir($dir)) {
+		if($element != '.' && $element != '..') {
+			if (!is_dir($dir_nom.'/'.$element)) {$fichier[] = $element;}
+		}
+	}
+	closedir($dir);
+	if(!empty($fichier)){
+		sort($fichier);// pour le tri croissant, rsort() pour le tri décroissant
+		foreach($fichier as $lien) {
+			//event
+			if (preg_match("/e/",$lien)){
+				$ext = substr($lien, -3);
+				$idm = substr($lien, 1, -4);
+				$sql = mysql_query("SELECT * FROM evenement WHERE `id`=$idm");
+				while($row = mysql_fetch_assoc($sql)){
+					$results[] = $row; 
+				}
+				if(empty($results)){
+					// kill des images.
+					if(file_exists("sources/images/e".$idm.".jpg")){
+						unlink("sources/images/e".$idm.".jpg");
+					}
+					elseif(file_exists("sources/images/e".$idm.".gif")){
+						unlink("sources/images/e".$idm.".gif");
+					}
+					elseif(file_exists("sources/images/e".$idm.".png")){
+						unlink("sources/images/e".$idm.".png");
+					}
+					if(file_exists("sources/images/min/e".$idm.".jpg")){
+						unlink("sources/images/min/e".$idm.".jpg");
+					}
+				}
+				$results = array(); // nettoyage de results
+			}
+			//artist
+			if (!preg_match("/e/",$lien)){
+				$ext = substr($lien, -3);
+				$idm = substr($lien, 0, -4);
+				$sqlb = mysql_query("SELECT * FROM artist WHERE `id`=$idm");
+				while($rowb = mysql_fetch_assoc($sqlb)){
+					$resultsb[] = $rowb; 
+				}
+				if(empty($resultsb)){
+					// kill des images.
+					if(file_exists("sources/images/".$idm.".jpg")){
+						unlink("sources/images/".$idm.".jpg");
+					}
+					elseif(file_exists("sources/images/".$idm.".gif")){
+						unlink("sources/images/".$idm.".gif");
+					}
+					elseif(file_exists("sources/images/".$idm.".png")){
+						unlink("sources/images/".$idm.".png");
+					}
+					if(file_exists("sources/images/min/".$idm.".jpg")){
+						unlink("sources/images/min/".$idm.".jpg");
+					}
+				}
+				$resultsb = array(); // nettoyage de results
+			}
+		}
+	 }
 	//afficher les futur evenement
 	$results = array();
 	$sql = mysql_query("SELECT * FROM evenement order by date ASC limit 0,3");
