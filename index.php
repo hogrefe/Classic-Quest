@@ -142,7 +142,7 @@
 			<table border="0" width="100%">
 			<tr><td>
 				<center><table border="0" WIDTH='90%'>
-					<td WIDTH='50%'><img src="sources/classic-quest.png" alt="Classic Quest" width="100%" /></td>
+					<td WIDTH='40%'><img src="sources/classic-quest.png" alt="Classic Quest" width="100%" /></td>
 					<td id='subdroit'>
 						<span id='subface'><a target="_blank" href="https://www.facebook.com/ClassicQuest"><img src="sources/facebook.png" alt="Notre page Facebook (officiel)" title="Notre page Facebook (officiel)" /></a></span>
 									<span id='submail'><a target="_blank" href="mailto:haris.seldon@gmail.com"><img src="sources/mail.png" alt="Contactez-nous" title="Contactez-nous" /></a></span>

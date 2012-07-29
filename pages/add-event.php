@@ -44,7 +44,7 @@
 			}
 			//redirection
 			echo '<SCRIPT LANGUAGE="JavaScript">
-					document.location.href="index.php"
+					document.location.href="galery-event"
 				</SCRIPT>';
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le nom, la date e tle lieu de l'évènement!</span></b>";
 	}
