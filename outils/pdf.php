@@ -23,7 +23,7 @@
 		// decoupe artist id enreg, event ...
 		if(preg_match("/artist/",$old)){
 				$id =  substr($old, 6);
-				$artist = recup_artist($id);
+				$artist = recuperation($id,'artist');
 				$neele = Decoupedatetime($artist[3]);
 				$mortle =  Decoupedatetime($artist[5]);
 				echo '<bookmark title="Informations" level="0" ></bookmark>';

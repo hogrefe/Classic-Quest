@@ -30,9 +30,9 @@
 			</SCRIPT>';
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le titre et le nom de l'artist</span></b>";
 	}
-	$enreg = recup_enreg($id);
+	$enreg = recuperation($id,'enregistrement');
 	$date = Decoupedatetime($enreg[4]);
-	$artist = recup_artist($enreg[1]);
+	$artist = recuperation($enreg[1],'artist');
 	echo 	"<div id='mod'>
 			<center><h2>Modifier l'histoire de l'enregistrement.</h2></center>
 			<table border='0' width='100%'>

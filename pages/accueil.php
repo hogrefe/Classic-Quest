@@ -3,7 +3,38 @@
 	// EVENEMENTS
 	$results = array();
 	// suppr les event passés
-	$sql = mysql_query("DELETE FROM evenement WHERE TO_DAYS(date) - TO_DAYS(NOW()) < 0");
+	$query = "SELECT * FROM evenement order by date";
+		$result = mysql_query($query);
+		// Recuperation des resultats
+		while($row = mysql_fetch_row($result))
+		{
+			$suppridate = "non";
+			$exploderdta = substr($row[2],-10, 10);
+			$expldate = explode('/', $exploderdta);
+			if($expldate[2] < date("Y"))
+			{
+				$suppridate = "ok";
+			}
+			elseif($expldate[2] == date("Y"))
+			{
+				if($expldate[0] < date("n"))
+				{
+					$suppridate = "ok";
+
+				}
+				elseif($expldate[0] == date("n"))
+				{
+					if($expldate[1] < date("j"))
+					{
+						$suppridate = "ok";
+					}
+				}
+			}
+			if($suppridate == "ok")
+			{
+				$sql = mysql_query("DELETE FROM evenement WHERE id='".$row[0]."'");
+			}
+		}
 	// supprimer les images inutiles
 	$dir_nom = 'sources/images/'; // dossier listé (pour lister le répertoir courant : $dir_nom = '.'  --> ('point')
 	$dir = opendir($dir_nom) or die('Erreur de listage : le répertoire n\'existe pas'); // on ouvre le contenu du dossier courant
@@ -19,7 +50,6 @@
 		foreach($fichier as $lien) {
 			//event
 			if (preg_match("/e/",$lien)){
-				$ext = substr($lien, -3);
 				$idm = substr($lien, 1, -4);
 				$sql = mysql_query("SELECT * FROM evenement WHERE `id`=$idm");
 				while($row = mysql_fetch_assoc($sql)){
@@ -44,7 +74,6 @@
 			}
 			//artist
 			if (!preg_match("/e/",$lien)){
-				$ext = substr($lien, -3);
 				$idm = substr($lien, 0, -4);
 				$sqlb = mysql_query("SELECT * FROM artist WHERE `id`=$idm");
 				while($rowb = mysql_fetch_assoc($sqlb)){
@@ -71,7 +100,7 @@
 	 }
 	//afficher les futur evenement
 	$results = array();
-	$sql = mysql_query("SELECT * FROM evenement order by date ASC limit 0,3");
+	$sql = mysql_query("SELECT * FROM evenement order by SUBSTRING(date,-7, 6) ASC limit 0,3");
 	while($row = mysql_fetch_assoc($sql)){
 		$results[] = $row; 
 	}
@@ -100,7 +129,9 @@
 		echo "<br />".$result['nom']."</a></li>";
 	}
 	if(count($results) != 0)
-		echo "</div><br /><br /><hr />";
+	{
+		echo "</div><br /><br /><br /><hr />";
+	}
 	// COMPOSITEUR
 	echo	"<div><center><h2>Les derniers compositeurs ajoutés ou modifiés.</h2></center>";
 	include('bdd.php');
@@ -112,7 +143,7 @@
 	$t = 0;
 	foreach ($results as $result) {
 		$id = $result['id'];
-		$artist = recup_artist($id);
+		$artist = recuperation($id,'artist');
 		$neele = Decoupedatetime($artist[3]);
 		$mortle =  Decoupedatetime($artist[5]);
 		if($t == 0){
@@ -181,7 +212,7 @@
 		$t = 0;
 		foreach ($results as $result) {
 			$id = $result['id'];
-			$artist = recup_artist($id);
+			$artist = recuperation($id,'artist');
 			$neele = Decoupedatetime($artist[3]);
 			$mortle =  Decoupedatetime($artist[5]);
 			if($t == 0){
@@ -258,7 +289,7 @@
 			$i = 0;
 			$res ="";
 			while($i != count($array)){
-				$rest = recup_artist($result['idartist']);
+				$rest = recuperation($result['idartist'],'artist');
 				if(file_exists("sources/images/".$rest[0].".".$array[$i])){
 					$mdcinq = md5_file("sources/images/min/".$rest[0].".".$array[$i]);
 					$res = "<img src='sources/images/min/".$rest[0].".".$array[$i]."?<?php echo".$mdcinq."; ?>' class='profil-photo' alt='".$rest[2]."' />";

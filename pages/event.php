@@ -1,7 +1,7 @@
 <?php
-	$event = recup_event($id);
+	$event = recuperation($id,'evenement');
 	echo 	"<center><h1>".$event[1]."</h1>
-				<br />";
+				<br /><table border='0'><tr><td width='40%'>";
 	// image artist
 	$array = array("jpg","png","gif","JPG","PNG","GIF");
 	$i = 0;
@@ -19,8 +19,7 @@
 	else{
 		echo $res;
 	}
-	echo 	"</center>
-				Prévu le : <strong>".Decoupedatetime($event[2])."</strong><br />
+	echo 	"</td><td width='40%'><input type='hidden' name='dateaffiche' id='dateaffiche' value='".addslashes($event[2])."'><div id='dateeventaffiche'></div></td></tr></table></center>
 				Prévu à cette adresse : <strong>$event[3]</strong><br />";
 	if(isset($_SESSION['username'])){
 		echo "<br /><table><tr></td><div id='mapsv'><a href='mod-event".$id."'>Modifier l'évènement</a></div><div id='mapsv'><a href='suppr-event".$id."'>Supprimer l'évènement</a></div>";
@@ -31,9 +30,4 @@
 	if($event[4] != "")
 		echo	"<h3>Détail, programme :</h3><br />$event[4]";
 	echo "<span class='auteur'>Dernière modification par ".$event[5].".</span></td></tr></table>";
-	//bouton jaime
-		echo 	'<br /><ul id="social"><li class="element"><div class="g-plusone" data-size="medium"></div></li>';
-		echo	'<li class="element"><div class="fb-like" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false"></div></li>';
-		echo 	'<li class="element"><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li></ul>';
-	// end button
 ?>

@@ -9,7 +9,7 @@
 	include('bdd.php');
 	
 	if(isset($ok) && isset($id)){
-		$resultat = recup_user($id);
+		$resultat = recuperation($id,'users');
 		$sql = 'UPDATE users SET statut="redacteur" WHERE id="'.$id.'"';
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$contenu="Bonjour, votre compte à été validé. Vous pouvez désormais vous connecter sur le site et ajouter de nouveau compositeur ou enregistrement. Merci à vous!";
@@ -20,7 +20,7 @@
 			</SCRIPT>';
 	}
 	if(isset($non) && isset($id)){
-		$resultat = recup_user($id);
+		$resultat = recuperation($id,'users');
 		$sql = "DELETE FROM `users` WHERE `id` = $id";
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$contenu = "Malheuresement votre compte n'a pas été retenu en tant que redcteur. Vous pouvez a tout moment vous réinscrire et proposer une présentation de vos objectif plus complet et adéquat pour devenir rédacteur sur notre site. Merci a vous!";

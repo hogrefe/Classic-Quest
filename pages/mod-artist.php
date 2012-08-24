@@ -54,7 +54,7 @@
 		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le pseudonime et le nom réel de l'artist</span></b>";
 	}
 
-	$artist = recup_artist($id);
+	$artist = recuperation($id,'artist');
 	$neele = Decoupedatetime($artist[3]);
 	$mortle =  Decoupedatetime($artist[5]);
 	echo 	"<div id='mod'>

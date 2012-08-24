@@ -17,7 +17,7 @@
 			</SCRIPT>';
 	}
 	if(isset($ban) && $ban == "ban"){
-		$user = recup_user($id);
+		$user = recuperation($id,'users');
 		$sql = 'DELETE FROM `users` WHERE `id` = "'.$id.'"';
 		mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 		$sql = "INSERT INTO bans Values('','".$user[3]."')";

@@ -29,6 +29,6 @@
 	}
 ?>
 <form method="POST" action="">
-	<br /><label for="suppr">Confirmer la suppression de <span style="color:red;"><b><?php   $event =  recup_event($id); echo $event[1]; ?></b></span> : </label>
+	<br /><label for="suppr">Confirmer la suppression de <span style="color:red;"><b><?php   $event =  recuperation($id,'evenement'); echo $event[1]; ?></b></span> : </label>
 	<input type="submit" name="suppr" value="Supprimer" />
 </form>

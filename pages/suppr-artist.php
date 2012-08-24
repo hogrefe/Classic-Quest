@@ -31,6 +31,6 @@
 	}
 ?>
 <form method="POST" action="">
-	<br /><label for="suppr">Confirmer la suppression de <span style="color:red;"><b><?php   $artist = recup_artist($id); echo $artist[1]; ?></b></span> : </label>
+	<br /><label for="suppr">Confirmer la suppression de <span style="color:red;"><b><?php   $artist = recuperation($id,'artist'); echo $artist[1]; ?></b></span> : </label>
 	<input type="submit" name="suppr" value="Supprimer" />
 </form>

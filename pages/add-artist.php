@@ -63,9 +63,9 @@
 				<table border='0' width='100%'>
 				<tr><td><label for='nom'>Nom d'artiste : </label><input type='text' name='nom' value='' /></td>
 				<td><label for='realnom'>Nom complet de l'artiste : </label><input type='text' name='realnom' value='' /></td></tr>
-				<tr><td><label for='neele'>Née le : </label><input type='text' name='neele' value='' /></td>
+				<tr><td><label for='neele'>Née le : </label><input type='text' name='neele' id='neele' value='' /></td>
 				<td><label for='neea'> à : </label><input type='text' name='neea' value='' /></td></tr>
-				<tr><td><label for='mortle'>Décédé(e) le : </label><input type='text' name='mortle' value='' /></td>
+				<tr><td><label for='mortle'>Décédé(e) le : </label><input type='text' name='mortle' id='mortle' value='' /></td>
 				<td><label for='morta'> à : </label><input type='text' name='morta' value='' /></td></tr>
 				<tr><td><label for='typeartist'>L'artiste est un : </label>
 					<select name='typeartist'>

@@ -31,8 +31,8 @@
 				}
 			}
 		$date = "";
-		if(!empty($_POST['date']))
-			$date =  Reversedecoupedatetime(htmlspecialchars(trim(addslashes($_POST['date']))));
+		if(!empty($_POST['dateaffiche']))
+			$date =  htmlspecialchars(trim(addslashes($_POST['dateaffiche']))); // a modifier pour datepicker
 		include('bdd.php');
 		$nom = htmlspecialchars(trim(addslashes($_POST['nom'])));
 		$lieu = htmlspecialchars(trim(addslashes($_POST['lieu'])));
@@ -48,16 +48,17 @@
 			echo '<SCRIPT LANGUAGE="JavaScript">
 					document.location.href="index.php"
 				</SCRIPT>';
-		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le nom, la date e tle lieu de l'évènement!</span></b>";
+		} else echo "<b><span style='color:red;'>Vous devez au moins renseigner le nom, la date et le lieu de l'évènement!</span></b>";
 	}
-	$event = recup_event($id);
+	$event = recuperation($id,'evenement');
 	echo 	"<div id='mod'>
 			<center><h2>Ajouter un évènement.</h2></center>
 			<form method='POST' action='' enctype='multipart/form-data'>
 				<center>Uploader une image (jpg,png,gif et inférieur a 1Mo) : <input type='file' name='img' /></center>
 				<table border='0' width='100%'>
 				<tr><td><label for='nom'>Nom : </label><input type='text' name='nom' value='".$event[1]."' /></td>
-				<td><label for='date'>Date : </label><input type='text' name='date' value='".Decoupedatetime($event[2])."' /></td></tr>
+				<td><label for='date'>Date : </label><input type='hidden' name='dateaffiche' id='dateaffiche' value='".addslashes($event[2])."' /><br /><div id='datemodevent' class='box'></div>"; // datepicker a ajouter
+	echo 	"</td></tr>
 				<tr><td><label for='lieu'>Lieu : </label><input type='text' id='lieu' name='lieu' value='".$event[3]."' /></td>
 				<td><div id='mapsv'>Rechercher ce lieu</div></td></tr>
 			</table>";

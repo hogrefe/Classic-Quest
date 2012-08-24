@@ -1,7 +1,7 @@
 <?php
 			if(isset($_POST['submit'])){
-				$search = addslashes($_POST['search']); // securite pour la recherche
-				$table = addslashes($_POST['table']);
+				$search = htmlentities(trim(addslashes($_POST['search']))); // securite pour la recherche
+				$table = htmlentities(trim(addslashes($_POST['table'])));
 				if(strlen($search) <= 3){ // s'il est vide
 					$error[]= "<br /><span style='color:red;'>Veuillez saisir une recherche de plus de 3 caractères!</span>";
 				}

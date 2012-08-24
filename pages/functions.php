@@ -1,7 +1,9 @@
 <?php
 	// cropper d'image uploader
-	class Img{
-		static function creerMin($img,$chemin,$nom,$mlargeur=100,$mhauteur=100){
+	class Img
+	{
+		static function creerMin($img,$chemin,$nom,$mlargeur=100,$mhauteur=100)
+		{
 			// On supprime l'extension du nom
 			$nom = substr($nom,0,-4);
 			// On récupère les dimensions de l'image
@@ -28,106 +30,84 @@
 		}
 	}
 	
-	//recupere les infos de l'artist
-	function recup_artist($id){
-		$query = "SELECT * FROM artist ORDER BY id";
+	//recupere les infos de l'artist, enregistrement, users et/ou events
+	function recuperation($id,$table)
+	{
+		$query = "SELECT * FROM $table ORDER BY id";
 		$result = mysql_query($query);
 		// Recuperation des resultats
-		while($row = mysql_fetch_row($result)){
-			if ($row[0] == htmlentities(trim($id))){
-				return $row;
-			}
-		}
-	}
-
-	//recupere les infos de l'enregistrment
-	function recup_enreg($id){
-		$query = "SELECT * FROM enregistrement ORDER BY id";
-		$result = mysql_query($query);
-		// Recuperation des resultats
-		while($row = mysql_fetch_row($result)){
-			if ($row[0] == htmlentities(trim($id))){
-				return $row;
-			}
-		}
-	}
-
-	//recupere les infos de l'evenement
-	function recup_event($id){
-		$query = "SELECT * FROM evenement ORDER BY id";
-		$result = mysql_query($query);
-		// Recuperation des resultats
-		while($row = mysql_fetch_row($result)){
-			if ($row[0] == htmlentities(trim($id))){
-				return $row;
-			}
-		}
-	}
-
-	//recupere les infos de l'user
-	function recup_user($id){
-		$query = "SELECT * FROM users ORDER BY id";
-		$result = mysql_query($query);
-		// Recuperation des resultats
-		while($row = mysql_fetch_row($result)){
-			if ($row[0] == htmlentities(trim($id))){
+		while($row = mysql_fetch_row($result))
+		{
+			if ($row[0] == htmlentities(trim($id)))
+			{
 				return $row;
 			}
 		}
 	}
 
 	//decoupe le datetime 0000-00-00 en  00/00/0000 et le retourne
-	function Decoupedatetime($datetime){
+	function Decoupedatetime($datetime)
+	{
 		$exploderdta = explode('-',$datetime);
     	return $exploderdta[2]."/".$exploderdta[1]."/".$exploderdta[0];
     }
 
 
     //decoupe le datetime 00/00/0000 en 0000-00-00 00:00:00 et le retourne
-	function Reversedecoupedatetime($date){
+	function Reversedecoupedatetime($date)
+	{
 		$exploderdta = explode('/',$date);
     	return $exploderdta[2]."-".$exploderdta[1]."-".$exploderdta[0];
     }
 
     // galery artist
-	function afficher_artist($lettre,$artisttype){ 		// affiche les element de la page demander
+	function afficher_artist($lettre,$artisttype)
+	{ 		// affiche les element de la page demander
 		$results = array();
-		if($artisttype == ''){
+		if($artisttype == '')
+		{
 			$restypeartist = '';
-		}elseif ($artisttype != 'Compositeur'){
+		}elseif ($artisttype != 'Compositeur')
+		{
 			$restypeartist = "WHERE typeartist != 'Compositeur'";
 		}else $restypeartist = "WHERE typeartist = '$artisttype'";
 		if($lettre == ''){
 			$sql = mysql_query("SELECT * FROM artist ".$restypeartist." ORDER BY nomartist ASC");
 		}else $sql = mysql_query("SELECT * FROM artist ".$restypeartist." AND nomartist LIKE '".$lettre."%' ORDER BY nomartist ASC");
-		while($row = mysql_fetch_assoc($sql)){
+		while($row = mysql_fetch_assoc($sql))
+		{
 			$results[] = $row; 
 		}
 		return $results;
 	}
 
 	// galery nouveauté
-	function afficher_nouveaute(){ 		// affiche les element de la page demander
+	function afficher_nouveaute()
+	{ 		// affiche les element de la page demander
 		$results = array();
 		$sql = mysql_query("SELECT * FROM artist order by id desc limit 0,10");
-		while($row = mysql_fetch_assoc($sql)){
+		while($row = mysql_fetch_assoc($sql))
+		{
 			$results[] = $row; 
 		}
 		return $results;
 	}
 
 	// afficher liste d'enregistrements
-	function afficher_enregistrement($id){
+	function afficher_enregistrement($id)
+	{
 		$result = array();
 		$ssql = mysql_query("SELECT * FROM enregistrement WHERE idartist = $id ORDER BY annee ASC");
-		while($srow = mysql_fetch_assoc($ssql)){
+		while($srow = mysql_fetch_assoc($ssql))
+		{
 			$result[] = $srow; 
 		}
 		return $result;
 	}
 
 	// envoi email
-	function sendmail($mail,$contenu,$sujet){
+	function sendmail($mail,$contenu,$sujet)
+	{
 			if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
 			{
 				$passage_ligne = "\r\n";
@@ -139,8 +119,8 @@
 			$message_txt = $contenu;
 			$message_html = "<html><head></head><body>".$contenu."</body></html>";
 			$boundary = "-----=".md5(rand());
-			$header = "From: \"Musique Classique\"<haris.seldon@gmail.com>".$passage_ligne;
-			$header.= "Reply-to: \"Musique classique\"<haris.seldon@gmail.com>".$passage_ligne;
+			$header = "From: \"Classic Quest\"<haris.seldon@gmail.com>".$passage_ligne;
+			$header.= "Reply-to: \"Classic Quest\"<haris.seldon@gmail.com>".$passage_ligne;
 			$header.= "MIME-Version: 1.0".$passage_ligne;
 			$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
 			$message = $passage_ligne."--".$boundary.$passage_ligne;
@@ -157,7 +137,8 @@
 	}
 
 	//moteur de recherche du site recherche
-	function resultat_recherche($search,$table){
+	function resultat_recherche($search,$table)
+	{
 		$t=explode(" ",$search);
 		$s = array();
 		foreach($t as $kw){
@@ -165,10 +146,12 @@
 			   + erreur_lettres_proches_azerty($kw) + erreur_lettres_proches_qwerty($kw);
 		}
 		$sql="SELECT * FROM $table";
-		if($table == "artist"){ 				// artist
+		if($table == "artist")
+		{ 				// artist
 			$i = 0;
 			foreach($s as $mot){
-				if(strlen($mot)>3){
+				if(strlen($mot)>3)
+				{
 					if($i == 0){
 						$sql.=" WHERE ";
 					}
@@ -181,34 +164,44 @@
 			}
 			$i = 0;
 			foreach($s as $mot){
-				if(strlen($mot)>3){
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR nomartist LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR neea LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR morta LIKE '%$mot%'";
 				}
 				$i++;
 			}
 		}
-		if($table == "enregistrement"){ 		// enregistrement
+		if($table == "enregistrement")
+		{ 		// enregistrement
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
-					if($i == 0){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
+					if($i == 0)
+					{
 						$sql.=" WHERE ";
 					}
-					else{
+					else
+					{
 						$sql.= " OR ";
 					}
 					$sql.=" titre LIKE '%$mot%'";
@@ -216,42 +209,55 @@
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR instruments LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR type LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR interpretes LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR opus LIKE '%$mot%'";
 				}
 				$i++;
 			}
 		}
-		if($table == "evenement"){ 		// evenement
+		if($table == "evenement")
+		{ 		// evenement
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
-					if($i == 0){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
+					if($i == 0)
+					{
 						$sql.=" WHERE ";
 					}
-					else{
+					else
+					{
 						$sql.= " OR ";
 					}
 					$sql.=" nom LIKE '%$mot%'";
@@ -259,22 +265,28 @@
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR date LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR lieu LIKE '%$mot%'";
 				}
 				$i++;
 			}
 			$i = 0;
-			foreach($s as $mot){
-				if(strlen($mot)>3){
+			foreach($s as $mot)
+			{
+				if(strlen($mot)>3)
+				{
 					$sql.= " OR detail LIKE '%$mot%'";
 				}
 				$i++;
@@ -299,15 +311,18 @@
 
 	// Script generateur de faute de frappe pour moteur de recherhce
 		//oubli de lettres
-		function oubli_lettres($sld){
+		function oubli_lettres($sld)
+		{
 			$array = preg_split('//',$sld);
 			$size = sizeof($array);
 			$size = $size - 1;
 			$temp = "";
 			$s = array();
-			for ($i = 1; $i < $size; $i++){
+			for ($i = 1; $i < $size; $i++)
+			{
 				if (!strcmp($array[ $i]," ")) { continue; }
-				for ($x = 1; $x < $size; $x++) {
+				for ($x = 1; $x < $size; $x++)
+				{
 					if ($x == $i) { continue; }
 					$temp = $temp . $array[ $x];
 				}

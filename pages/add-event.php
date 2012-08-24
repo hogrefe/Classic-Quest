@@ -8,7 +8,7 @@
 	if(isset($_POST['submit'])){
 		$date = "";
 		if(!empty($_POST['date']))
-			$date =  Reversedecoupedatetime(htmlspecialchars(trim(addslashes($_POST['date']))));
+			$date =  htmlspecialchars(trim(addslashes($_POST['date'])));
 		include('bdd.php');
 		$nom = htmlspecialchars(trim(addslashes($_POST['nom'])));
 		$lieu = htmlspecialchars(trim(addslashes($_POST['lieu'])));
@@ -54,7 +54,7 @@
 				<center>Uploader une image (jpg,png,gif et inférieur a 1Mo) : <input type='file' name='img' /></center>
 				<table border='0' width='100%'>
 				<tr><td><label for='nom'>Nom : </label><input type='text' name='nom' value='' /></td>
-				<td><label for='date'>Date : </label><input type='text' name='date' value='' /></td></tr>
+				<td><br /><label for='date'>Date : </label><input type='hidden' name='date' id='date' value='' /><br /><div id='dateevent' class='box'></div></td></tr>
 				<tr><td><label for='lieu'>Lieu : </label><input type='text' id='lieu' name='lieu' value='' /></td>
 				<td><div id='mapsv'>Rechercher ce lieu</div></td></tr>
 			</table>";

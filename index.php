@@ -10,54 +10,74 @@
 		if(isset($_GET['page'])){
 			if(preg_match("/pages\/artist/",$_GET['page'])){
 				$idart =  substr($_GET["page"], 12, -4);
-				$rowb = recup_artist($idart);  
+				$rowb = recuperation($idart,'artist');  
 				echo "<title>$rowb[2]</title>";
+				$titrepage = $rowb[2];
 			}
 			elseif(preg_match("/pages\/enreg/",$_GET['page'])){
 				$idart =  substr($_GET["page"], 11, -4);
-				$rowb = recup_enreg($idart);  
+				$rowb = recuperation($idart,'enregistrement');  
 				echo "<title>$rowb[7]</title>";
+				$titrepage = $rowb[7];
 			}
 			elseif(preg_match("/pages\/event/",$_GET['page'])){
 				$idevent =  substr($_GET["page"], 11, -4);
-				$rowb = recup_event($idevent);  
+				$rowb = recuperation($idevent,'evenement');  
 				echo "<title>$rowb[1]</title>";
+				$titrepage = $rowb[1];
 			}
 			elseif(preg_match("/admin/",$_GET['page'])){ 
 				echo "<title>Connexion & Inscription</title>";
+				$titrepage = "Connexion & Inscription";
 			}
 			elseif(preg_match("/param/",$_GET['page'])){ 
 				echo "<title>Modifier mes paramètres</title>";
-			}
-			elseif(preg_match("/admin/",$_GET['page'])){ 
-				echo "<title>Connexion & Inscription</title>";
-			}
-			elseif(preg_match("/admin/",$_GET['page'])){ 
-				echo "<title>Connexion & Inscription</title>";
+				$titrepage = "Modifier mes paramètres";
 			}
 			elseif(preg_match("/galery-artist-Compositeur/",$_GET['page'])){ 
 				echo "<title>Galerie des compositeurs</title>";
+				$titrepage = "Galerie des compositeurs";
 			}
 			elseif(preg_match("/galery-artist-Interprete/",$_GET['page'])){ 
 				echo "<title>Galerie des interpretes</title>";
+				$titrepage = "Galerie des interpretes";
 			}
 			elseif(preg_match("/galery-event/",$_GET['page'])){ 
 				echo "<title>Galerie des évènements</title>";
+				$titrepage = "Galerie des évènements";
 			}
 			else{
 				echo "<title>Classic Quest - Retrouvez les biographies des compositeurs et interpretes de la musique classique</title>";
+				$titrepage = "Retrouvez les biographies des compositeurs et interpretes de la musique classique";
 			}
 		}
 		else{
 			echo "<title>Classic Quest - Retrouvez les biographies des compositeurs et interpretes de la musique classique</title>";
+			$titrepage = "Retrouvez les biographies des compositeurs et interpretes de la musique classique";
 		}
+		echo '<script>
+				<!--
+				// Title bar variables
+				    var msg="Classic Quest : '.$titrepage.' | "; 
+				    var speed=200;               
+
+				    function ScrollTitle() 
+				   {
+				        document.title=msg;
+				        msg=msg.substring(1,msg.length)+msg.charAt(0);
+				        setTimeout("ScrollTitle()",speed);
+				    }
+				    ScrollTitle();
+
+				    //-->
+			</script>';
 		?>
 		<!-- Les verificaiton moteur de recherche -->
 		<meta name="google-site-verification" content="OuEb2kYVV6I-j4-80whAH2DQM5mFuxZR6kbnocmCrQ0" />
 		<meta name="msvalidate.01" content="734EC8B806B3910A95B2452CC192D1B9" />
 		<!-- Info du site  -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="Description" content="Galerie des compositeurs et enregistrements de la musique classique, ecrit par les utilisateurs inscrit." />
+		<meta name="Description" content="Galerie des compositeurs et enregistrements de la musique classique, ecrit par les utilisateurs inscrit. Avec la possibilité de télécharger les fiches en pdf." />
 		<meta name="Keywords" content="musique, classique, classic, beethoven, roques, steve, haris, seldon, jquery, php, css, js, mozart, bach, luc, sonneur, opengeek, github, gratuit, inscrit, connecter, redacteur, compositeur, enregistrement, opus, oeuvre, baroque, interprete, lieu, date, biographie, histoire, biography" />
 		<meta name="Subject" content="Musique classique" />
 		<meta name="Author" content="Roques Steve" />
@@ -71,6 +91,7 @@
 		<link rel="alternate" type="application/rss+xml" href="outils/rss.php" title="Classic Quest">
 		<link rel="stylesheet" type="text/css" href="css/moncss.css" />
 		<link rel="stylesheet" type="text/css" href="css/zoombox.css" />
+		<link rel="stylesheet" type="text/css" href="css/mdp.css">
 		<!-- TinyMCE -->
 <script type="text/javascript" src="outils/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 	<script type="text/javascript">
@@ -259,6 +280,13 @@
 					} 
 				?>
 			</td></tr></table>
+			<?php
+				//bouton jaime
+				echo 	'<br /><ul id="social"><li class="element"><div class="g-plusone" data-size="medium"></div></li>';
+				echo	'<li id="fbck" class="element"><div class="fb-like" data-send="false" data-layout="button_count" data-width="115" data-show-faces="false"></div></li>';
+				echo 	'<li class="element"><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li></ul>';
+				// end button
+			?>
 		</div>
 		<div id="bas">
 			Classic Quest - &copy; Copyright 2012 
@@ -273,10 +301,14 @@
 				- <a href="http://aary-fr.blogspot.fr/" target="_blank">AARY</a>
 			</div>
 		</div>
+		<div id="musique"></div><div id="musiquekonami"></div>
 	</body>
 	<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 	<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>
 	<script type="text/javascript" src="js/backpos.js"></script>
 	<script type="text/javascript" src="js/zoombox.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="js/jquery.ui.datepicker.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.multidatespicker.js"></script>
 	<script type="text/javascript" src="js/monjs.js"></script>
 </html>

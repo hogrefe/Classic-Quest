@@ -8,7 +8,7 @@
 	
 	include('bdd.php');
 	
-	$user = recup_user($_SESSION['id']);
+	$user = recuperation($_SESSION['id'],'users');
 
 	if(isset($_POST['submit'])){
 		$username = htmlspecialchars(trim(addslashes($_POST['username'])));
