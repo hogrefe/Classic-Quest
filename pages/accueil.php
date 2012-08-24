@@ -100,7 +100,7 @@
 	 }
 	//afficher les futur evenement
 	$results = array();
-	$sql = mysql_query("SELECT * FROM evenement order by SUBSTRING(date,-7, 6) ASC limit 0,3");
+	$sql = mysql_query("SELECT * FROM evenement order by SUBSTRING(date,-4, 4) ASC, SUBSTRING(date,-10, 2) ASC, SUBSTRING(date,-7, 2) ASC limit 0,3");
 	while($row = mysql_fetch_assoc($sql)){
 		$results[] = $row; 
 	}
